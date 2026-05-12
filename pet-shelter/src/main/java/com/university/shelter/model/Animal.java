@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public abstract class Animal implements Comparable<Animal> {
+
     private final UUID id;
     private final String name;
     private final LocalDate birthDate;
