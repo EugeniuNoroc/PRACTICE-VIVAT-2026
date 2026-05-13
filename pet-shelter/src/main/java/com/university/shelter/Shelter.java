@@ -33,4 +33,8 @@ public class Shelter {
         animals.remove(id);
     }
 
+    public List<Animal> findAll(){
+        return new ArrayList<>(animals.values());
+    }
+
 }
