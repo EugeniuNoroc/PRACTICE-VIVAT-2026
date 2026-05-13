@@ -21,6 +21,7 @@ public class Main
             System.out.println("2. Список всех животных");
             System.out.println("3. Найти по ID");
             System.out.println("4. Отдать животное");
+            System.out.println("5. Список животных по типу");
             System.out.println("0. Выход");
 
             int choice = scanner.nextInt();
@@ -84,6 +85,21 @@ public class Main
                 String input = scanner.next();
                 UUID uuid = UUID.fromString(input);
                 shelter.release(uuid);
+            } else if (choice == 5) {
+                System.out.println("Введите 1 если поиск по котам, 2 если по собакам:");
+                choice = scanner.nextInt();
+                scanner.nextLine();
+                if(choice == 1){
+                    List<Animal> all = shelter.findByType(Cat.class);
+                    for(Animal a : all){
+                        System.out.println(a);
+                    }
+                } else if (choice == 2) {
+                    List<Animal> all = shelter.findByType(Dog.class);
+                    for(Animal a : all){
+                        System.out.println(a);
+                    }
+                }
             } else if (choice == 0) {
                 break;
             }
