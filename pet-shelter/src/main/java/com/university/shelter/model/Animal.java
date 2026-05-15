@@ -81,7 +81,7 @@ public abstract class Animal implements Comparable<Animal> {
 
     @Override
     public int compareTo(Animal other){
-        return other.getBirthDate().compareTo(this.birthDate);
+        return this.birthDate.compareTo(other.getBirthDate());
     }
 
     public abstract String makeSound();

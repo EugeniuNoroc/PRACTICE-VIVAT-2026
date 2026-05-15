@@ -24,7 +24,7 @@ public class Cat extends Animal implements Feedable {
         return "Meow";
     }
 
-    public boolean getIndoorOnly() { return this.indoorOnly; }
+    public boolean isIndoorOnly() { return this.indoorOnly; }
 
     public String getBreed() { return this.breed; }
 

@@ -2,7 +2,9 @@ package com.university.shelter;
 
 import com.university.shelter.model.Animal;
 
+import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Shelter {
     private final Map<UUID, Animal> animals;
@@ -35,6 +37,14 @@ public class Shelter {
 
     public List<Animal> findAll(){
         return new ArrayList<>(animals.values());
+    }
+
+    public List<Animal> findOlderThan(int years){
+        List<Animal> result = animals.values()
+                .stream()
+                .filter(animal -> years < (LocalDate.now().getYear() - animal.getBirthDate().getYear()))
+                .collect(Collectors.toList());
+        return result;
     }
 
 }
