@@ -1,1 +1,3 @@
-# Practic
+# PRACTICE-VIVAT-2026
+## Java
+### Task 1 PET-SHELTER
