@@ -1,5 +1,7 @@
 package com.university.shelter.model;
 
+import com.university.shelter.exception.InvalidAnimalDataException;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -11,7 +13,7 @@ public class Beagle extends Dog{
         super(id, name, birthDate, weight, healthStatus, breed, obedianceLevel);
 
         if(devotion < 0){
-            throw new IllegalArgumentException("Поле не может быть отрицательным.");
+            throw new InvalidAnimalDataException("Поле не может быть отрицательным.");
         }
 
         this.devotion = devotion;

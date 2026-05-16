@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -127,9 +128,28 @@ public class ShelterTest {
                 .isInstanceOf(InvalidAnimalDataException.class);
     }
 
+    @DisplayName("Получить InvalidAnimalDataException если вес отрицательный")
+    @ParameterizedTest
+    @CsvSource({
+            "-1, Вес не может быть меньше 0.",
+            "-25, Вес не может быть меньше 0.",
+            "-0.2, Вес не может быть меньше 0."
+    })
+    void validate_shouldThrowException_ifWeightIsNotValid(double invalidWeight, String expectedMessage){
+        assertThatThrownBy(() -> new Cat(
+                UUID.randomUUID(),
+                "КотТипа",
+                LocalDate.of(2020, 1, 1),
+                invalidWeight,
+                HealthStatus.RECOVERING,
+                "Persian",
+                true))
+                .isInstanceOf(InvalidAnimalDataException.class).hasMessage(expectedMessage);
+    }
+
     @DisplayName("Получить толстейшую животину если животины есть")
     @Test
-    void getHeaviest_shouldReturnHeaviestAnimal_ifAnimalExists() {
+     void getHeaviest_shouldReturnHeaviestAnimal_ifAnimalExists() {
         //ARRANGE
         shelter.accept(testDog);
         shelter.accept(testCat);
