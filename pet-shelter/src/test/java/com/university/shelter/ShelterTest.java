@@ -8,6 +8,7 @@ import com.university.shelter.model.Cat;
 import com.university.shelter.model.Dog;
 import com.university.shelter.model.HealthStatus;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -50,6 +51,7 @@ public class ShelterTest {
         );
     }
 
+    @DisplayName("Добавить животное когда данные переданы верно")
     @Test
     void accept_shouldAddAnimal_whenAnimalIsValid() {
         //ARRANGE
@@ -62,6 +64,7 @@ public class ShelterTest {
         assertThat(result).isPresent();
     }
 
+    @DisplayName("Ничего не вернуть если животное не найдено")
     @Test
     void findById_shouldReturnEmpty_ifAnimalNotPresent() {
         //ACT
@@ -71,6 +74,7 @@ public class ShelterTest {
         assertThat(result).isEmpty();
     }
 
+    @DisplayName("Удалить животину если она есть")
     @Test
     void remove_shouldRemoveAnimal_ifAnimalExists() {
         //ARRANGE
@@ -84,12 +88,14 @@ public class ShelterTest {
         assertThat(result).isEmpty();
     }
 
+    @DisplayName("Получить AnimalNotFoundException если животину не нашли при удалении")
     @Test
     void remove_shouldThrowException_ifAnimalNotPresent() {
-        //ASSERT
+        //ASSERT+ACT
         assertThatThrownBy(() -> shelter.release(testCat.getId())).isInstanceOf(AnimalNotFoundException.class);
     }
 
+    @DisplayName("Получить животных по принадлежности к классу")
     @Test
     void findByType_shouldReturnCat_ifAnimalIsCat() {
         //ARRANGE
@@ -104,6 +110,7 @@ public class ShelterTest {
     }
 
     //Параметизированный тест на проверку пустого имени, null и пробелов
+    @DisplayName("Получить InvalidAnimalDataException если введенный ник животного плохой")
     @ParameterizedTest
     @NullAndEmptySource
     @ValueSource(strings = {" ", "  "})
@@ -120,6 +127,7 @@ public class ShelterTest {
                 .isInstanceOf(InvalidAnimalDataException.class);
     }
 
+    @DisplayName("Получить толстейшую животину если животины есть")
     @Test
     void getHeaviest_shouldReturnHeaviestAnimal_ifAnimalExists() {
         //ARRANGE
@@ -133,6 +141,7 @@ public class ShelterTest {
         assertThat(result).isPresent().contains(testDog);
     }
 
+    @DisplayName("Получить старейшую животину если животины есть")
     @Test
     void findOlderThan_shouldReturnOldest_ifAnimalExists() {
         //ARRANGE
@@ -146,6 +155,7 @@ public class ShelterTest {
         assertThat(result).isNotEmpty().contains(testDog).doesNotContain(testCat);
     }
 
+    @DisplayName("Вернуть средний возраст животин если они есть")
     @Test
     void averageAge_shouldReturnAverageAgeOfAnimals_ifAnimalsExists(){
         //ARRANGE
@@ -159,6 +169,7 @@ public class ShelterTest {
         assertThat(result).isGreaterThan(6).isLessThan(10);
     }
 
+    @DisplayName("Посчитать животин по классам если они есть")
     @Test
     void countByType_shouldReturnAmountOfTypeAnimals_ifAnimalsExists(){
         //ARRANGE
@@ -172,6 +183,7 @@ public class ShelterTest {
         assertThat(result).isNotEmpty().containsEntry(Cat.class, 1L).containsEntry(Dog.class, 1L); //1L - что-то типа обертки, вроде интовый 1, но на деле объект
     }
 
+    @DisplayName("Лутануть DuplicateAnimalException если принятое животное уже есть")
     @Test
     void accept_shouldReturnException_ifAnimalDuplicate(){
         //ARRANGE
