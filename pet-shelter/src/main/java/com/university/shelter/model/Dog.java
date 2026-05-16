@@ -1,5 +1,7 @@
 package com.university.shelter.model;
 
+import com.university.shelter.exception.InvalidAnimalDataException;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -12,11 +14,11 @@ public class Dog extends Animal implements Feedable {
         super(id, name, birthDate, weight, healthStatus);
 
         if(breed == null){
-            throw new IllegalArgumentException("Поле должно быть заполнено");
+            throw new InvalidAnimalDataException("Поле должно быть заполнено");
         }
 
         if(obedienceLevel < 0){
-            throw new IllegalArgumentException("Поле не может быть отрицательным");
+            throw new InvalidAnimalDataException("Поле не может быть отрицательным");
         }
 
         this.breed = breed;

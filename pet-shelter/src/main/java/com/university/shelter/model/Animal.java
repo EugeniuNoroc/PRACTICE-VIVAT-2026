@@ -1,5 +1,7 @@
 package com.university.shelter.model;
 
+import com.university.shelter.exception.InvalidAnimalDataException;
+
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
@@ -15,23 +17,23 @@ public abstract class Animal implements Comparable<Animal> {
     public Animal(UUID id, String name, LocalDate birthDate, double weight, HealthStatus healthStatus){
 
         if(healthStatus == null){
-            throw new IllegalArgumentException("Поле должно быть заполнено");
+            throw new InvalidAnimalDataException("Поле должно быть заполнено");
         }
 
         if(id == null){
-            throw new IllegalArgumentException("Поле должно быть заполнено");
+            throw new InvalidAnimalDataException("Поле должно быть заполнено");
         }
 
         if(name == null || name.isBlank()){
-            throw new IllegalArgumentException("Неккоректное название.");
+            throw new InvalidAnimalDataException("Неккоректное название.");
         }
 
         if(birthDate == null){
-            throw new IllegalArgumentException("Поле должно быть заполнено.");
+            throw new InvalidAnimalDataException("Поле должно быть заполнено.");
         }
 
         if(weight <= 0){
-            throw new IllegalArgumentException("Вес не может быть меньше 0.");
+            throw new InvalidAnimalDataException("Вес не может быть меньше 0.");
         }
 
         this.name = name;

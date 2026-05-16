@@ -1,5 +1,8 @@
 package com.university.shelter;
 
+import com.university.shelter.exception.AnimalNotFoundException;
+import com.university.shelter.exception.DuplicateAnimalException;
+import com.university.shelter.exception.InvalidAnimalDataException;
 import com.university.shelter.model.Animal;
 import com.university.shelter.model.Cat;
 import com.university.shelter.model.Dog;
@@ -12,6 +15,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,17 +51,19 @@ public class ShelterTest {
     }
 
     @Test
-    void accept_shouldAddAnimal_whenAnimalIsValid(){
-        //ACT
+    void accept_shouldAddAnimal_whenAnimalIsValid() {
+        //ARRANGE
         shelter.accept(testCat);
 
-        //ASSERT
+        //ACT
         Optional<Animal> result = shelter.findById(testCat.getId());
+
+        //ASSERT
         assertThat(result).isPresent();
     }
 
     @Test
-    void findById_shouldReturnEmpty_ifAnimalNotPresent(){
+    void findById_shouldReturnEmpty_ifAnimalNotPresent() {
         //ACT
         Optional<Animal> result = shelter.findById(UUID.randomUUID());
 
@@ -66,43 +72,43 @@ public class ShelterTest {
     }
 
     @Test
-    void remove_shouldRemoveAnimal_ifAnimalExists(){
-        //ACT
+    void remove_shouldRemoveAnimal_ifAnimalExists() {
+        //ARRANGE
         shelter.accept(testCat);
         shelter.release(testCat.getId());
 
-        //ASSERT
+        //ACT
         Optional<Animal> result = shelter.findById(testCat.getId());
+
+        //ASSERT
         assertThat(result).isEmpty();
     }
 
     @Test
-    void remove_shouldDoNothing_ifAnimalNotPresent(){
-        //ACT
-        shelter.release(testCat.getId());
-
+    void remove_shouldThrowException_ifAnimalNotPresent() {
         //ASSERT
-        Optional<Animal> result = shelter.findById(testCat.getId());
-        assertThat(result).isEmpty();
+        assertThatThrownBy(() -> shelter.release(testCat.getId())).isInstanceOf(AnimalNotFoundException.class);
     }
 
     @Test
-    void findByType_shouldReturnCat_ifAnimalIsCat(){
-        //ACT
+    void findByType_shouldReturnCat_ifAnimalIsCat() {
+        //ARRANGE
         shelter.accept(testCat);
         shelter.accept(testDog);
 
-        //ASERT
+        //ACT
         List<Animal> result = shelter.findByType(Cat.class);
+
+        //ASSERT
         assertThat(result).hasSize(1).allMatch(a -> a instanceof Cat);
     }
 
     //Параметизированный тест на проверку пустого имени, null и пробелов
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource (strings = {"", " ", "  "})
-    void animal_shouldThrowException_whenNameIsInvalid(String invalidName){
-        //ASERT
+    @ValueSource(strings = {" ", "  "})
+    void animal_shouldThrowException_whenNameIsInvalid(String invalidName) {
+        //ASSERT
         assertThatThrownBy(() -> new Cat(
                 UUID.randomUUID(),
                 invalidName,
@@ -111,6 +117,67 @@ public class ShelterTest {
                 HealthStatus.RECOVERING,
                 "Persian",
                 true))
-        .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(InvalidAnimalDataException.class);
+    }
+
+    @Test
+    void getHeaviest_shouldReturnHeaviestAnimal_ifAnimalExists() {
+        //ARRANGE
+        shelter.accept(testDog);
+        shelter.accept(testCat);
+
+        //ACT
+        Optional<Animal> result = shelter.findHeaviest();
+
+        //ASSERT
+        assertThat(result).isPresent().contains(testDog);
+    }
+
+    @Test
+    void findOlderThan_shouldReturnOldest_ifAnimalExists() {
+        //ARRANGE
+        shelter.accept(testDog);
+        shelter.accept(testCat);
+
+        //ACT
+        List<Animal> result = shelter.findOlderThan(7);
+
+        //ASSERT
+        assertThat(result).isNotEmpty().contains(testDog).doesNotContain(testCat);
+    }
+
+    @Test
+    void averageAge_shouldReturnAverageAgeOfAnimals_ifAnimalsExists(){
+        //ARRANGE
+        shelter.accept(testDog);
+        shelter.accept(testCat);
+
+        //ACT
+        double result = shelter.averageAge();
+
+        //ASSERT
+        assertThat(result).isGreaterThan(6).isLessThan(10);
+    }
+
+    @Test
+    void countByType_shouldReturnAmountOfTypeAnimals_ifAnimalsExists(){
+        //ARRANGE
+        shelter.accept(testDog);
+        shelter.accept(testCat);
+
+        //ACT
+        Map<Class<? extends Animal>, Long> result = shelter.countByType();
+
+        //ASSERT
+        assertThat(result).isNotEmpty().containsEntry(Cat.class, 1L).containsEntry(Dog.class, 1L); //1L - что-то типа обертки, вроде интовый 1, но на деле объект
+    }
+
+    @Test
+    void accept_shouldReturnException_ifAnimalDuplicate(){
+        //ARRANGE
+        shelter.accept(testDog);
+
+        //ACT+ASSERT
+        assertThatThrownBy(() -> shelter.accept(testDog)).isInstanceOf(DuplicateAnimalException.class);
     }
 }
