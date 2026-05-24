@@ -18,7 +18,6 @@ public class Shelter {
     public void accept(Animal animal) {
         if (animals.containsKey(animal.getId())) {
             throw new DuplicateAnimalException(animal.getId());
-
         } else {
             animals.put(animal.getId(), animal);
         }

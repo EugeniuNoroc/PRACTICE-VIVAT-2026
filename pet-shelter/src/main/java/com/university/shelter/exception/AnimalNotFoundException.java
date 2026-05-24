@@ -4,6 +4,6 @@ import java.util.UUID;
 
 public class AnimalNotFoundException extends ShelterException{
     public AnimalNotFoundException(UUID id){
-        super("Животное с айди" + id + "не найдено");
+        super("Животное с айди " + id + " не найдено");
     }
 }
