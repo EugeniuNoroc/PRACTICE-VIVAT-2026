@@ -4,8 +4,10 @@ import com.university.shelter.exception.AnimalNotFoundException;
 import com.university.shelter.exception.DuplicateAnimalException;
 import com.university.shelter.model.Animal;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class InMemoryAnimalDao implements AnimalDao {
     private final Map<UUID, Animal> storage = new ConcurrentHashMap<>();
@@ -55,5 +57,38 @@ public class InMemoryAnimalDao implements AnimalDao {
         } else {
             throw new AnimalNotFoundException(id);
         }
+    }
+
+    @Override
+    public Optional<Animal> findHeaviest() {
+        return storage.values()
+                .stream()
+                .max(Comparator.comparingDouble(a -> a.getWeight())); //.max((a, b) -> Double.compare(a.getWeight(), b.getWeight()))
+    }
+
+    @Override
+    public List<Animal> findOlderThan(int years) {
+        return storage.values()
+                .stream()
+                .filter(animal -> years < (LocalDate.now().getYear() - animal.getBirthDate().getYear()))
+                .collect(Collectors.toList()); // Можно заменить на .toList() из Java 16+
+    }
+
+    @Override
+    public double averageAge() {
+        return storage.values()
+                .stream()
+                .mapToDouble(a -> LocalDate.now().getYear() - a.getBirthDate().getYear())
+                .average().orElse(0);
+    }
+
+    @Override
+    public Map<Class<? extends Animal>, Long> countByType() {
+        return storage.values()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        a -> a.getClass(),
+                        Collectors.counting()
+                ));
     }
 }

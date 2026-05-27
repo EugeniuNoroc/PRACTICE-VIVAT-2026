@@ -1,5 +1,6 @@
 package com.university.shelter;
 
+import com.university.shelter.dao.InMemoryAnimalDao;
 import com.university.shelter.exception.AnimalNotFoundException;
 import com.university.shelter.exception.DuplicateAnimalException;
 import com.university.shelter.exception.InvalidAnimalDataException;
@@ -25,13 +26,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ShelterTest {
-    private Shelter shelter;
+    private ShelterService service;
     private Cat testCat;
     private Dog testDog;
 
     @BeforeEach
     void setUp() {
-        shelter = new Shelter();
+        service = new ShelterService(new InMemoryAnimalDao());
         testCat = new Cat(
                 UUID.randomUUID(),
                 "ИмяКота",
@@ -56,10 +57,10 @@ public class ShelterTest {
     @Test
     void accept_shouldAddAnimal_whenAnimalIsValid() {
         //ARRANGE
-        shelter.accept(testCat);
+        service.accept(testCat);
 
         //ACT
-        Optional<Animal> result = shelter.findById(testCat.getId());
+        Optional<Animal> result = service.findById(testCat.getId());
 
         //ASSERT
         assertThat(result).isPresent();
@@ -69,7 +70,7 @@ public class ShelterTest {
     @Test
     void findById_shouldReturnEmpty_ifAnimalNotPresent() {
         //ACT
-        Optional<Animal> result = shelter.findById(UUID.randomUUID());
+        Optional<Animal> result = service.findById(UUID.randomUUID());
 
         //ASSERT
         assertThat(result).isEmpty();
@@ -79,11 +80,11 @@ public class ShelterTest {
     @Test
     void remove_shouldRemoveAnimal_ifAnimalExists() {
         //ARRANGE
-        shelter.accept(testCat);
-        shelter.release(testCat.getId());
+        service.accept(testCat);
+        service.release(testCat.getId());
 
         //ACT
-        Optional<Animal> result = shelter.findById(testCat.getId());
+        Optional<Animal> result = service.findById(testCat.getId());
 
         //ASSERT
         assertThat(result).isEmpty();
@@ -93,18 +94,18 @@ public class ShelterTest {
     @Test
     void remove_shouldThrowException_ifAnimalNotPresent() {
         //ASSERT+ACT
-        assertThatThrownBy(() -> shelter.release(testCat.getId())).isInstanceOf(AnimalNotFoundException.class);
+        assertThatThrownBy(() -> service.release(testCat.getId())).isInstanceOf(AnimalNotFoundException.class);
     }
 
     @DisplayName("Получить животных по принадлежности к классу")
     @Test
     void findByType_shouldReturnCat_ifAnimalIsCat() {
         //ARRANGE
-        shelter.accept(testCat);
-        shelter.accept(testDog);
+        service.accept(testCat);
+        service.accept(testDog);
 
         //ACT
-        List<Animal> result = shelter.findByType(Cat.class);
+        List<Animal> result = service.findByType(Cat.class);
 
         //ASSERT
         assertThat(result).hasSize(1).allMatch(a -> a instanceof Cat);
@@ -151,11 +152,11 @@ public class ShelterTest {
     @Test
      void getHeaviest_shouldReturnHeaviestAnimal_ifAnimalExists() {
         //ARRANGE
-        shelter.accept(testDog);
-        shelter.accept(testCat);
+        service.accept(testDog);
+        service.accept(testCat);
 
         //ACT
-        Optional<Animal> result = shelter.findHeaviest();
+        Optional<Animal> result = service.findHeaviest();
 
         //ASSERT
         assertThat(result).isPresent().contains(testDog);
@@ -165,11 +166,11 @@ public class ShelterTest {
     @Test
     void findOlderThan_shouldReturnOldest_ifAnimalExists() {
         //ARRANGE
-        shelter.accept(testDog);
-        shelter.accept(testCat);
+        service.accept(testDog);
+        service.accept(testCat);
 
         //ACT
-        List<Animal> result = shelter.findOlderThan(7);
+        List<Animal> result = service.findOlderThan(7);
 
         //ASSERT
         assertThat(result).isNotEmpty().contains(testDog).doesNotContain(testCat);
@@ -179,11 +180,11 @@ public class ShelterTest {
     @Test
     void averageAge_shouldReturnAverageAgeOfAnimals_ifAnimalsExists(){
         //ARRANGE
-        shelter.accept(testDog);
-        shelter.accept(testCat);
+        service.accept(testDog);
+        service.accept(testCat);
 
         //ACT
-        double result = shelter.averageAge();
+        double result = service.averageAge();
 
         //ASSERT
         assertThat(result).isGreaterThan(6).isLessThan(10);
@@ -193,11 +194,11 @@ public class ShelterTest {
     @Test
     void countByType_shouldReturnAmountOfTypeAnimals_ifAnimalsExists(){
         //ARRANGE
-        shelter.accept(testDog);
-        shelter.accept(testCat);
+        service.accept(testDog);
+        service.accept(testCat);
 
         //ACT
-        Map<Class<? extends Animal>, Long> result = shelter.countByType();
+        Map<Class<? extends Animal>, Long> result = service.countByType();
 
         //ASSERT
         assertThat(result).isNotEmpty().containsEntry(Cat.class, 1L).containsEntry(Dog.class, 1L); //1L - что-то типа обертки, вроде интовый 1, но на деле объект
@@ -207,9 +208,9 @@ public class ShelterTest {
     @Test
     void accept_shouldReturnException_ifAnimalDuplicate(){
         //ARRANGE
-        shelter.accept(testDog);
+        service.accept(testDog);
 
         //ACT+ASSERT
-        assertThatThrownBy(() -> shelter.accept(testDog)).isInstanceOf(DuplicateAnimalException.class);
+        assertThatThrownBy(() -> service.accept(testDog)).isInstanceOf(DuplicateAnimalException.class);
     }
 }

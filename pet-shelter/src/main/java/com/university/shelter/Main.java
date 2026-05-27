@@ -1,5 +1,6 @@
 package com.university.shelter;
 
+import com.university.shelter.dao.AnimalDaoJdbc;
 import com.university.shelter.exception.ShelterException;
 import com.university.shelter.model.Animal;
 import com.university.shelter.model.Cat;
@@ -14,7 +15,7 @@ import java.util.UUID;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Shelter shelter = new Shelter();
+        ShelterService shelter = new ShelterService(new AnimalDaoJdbc());
             while (true) {
                 try {
                 System.out.println("1. Принять животное");
