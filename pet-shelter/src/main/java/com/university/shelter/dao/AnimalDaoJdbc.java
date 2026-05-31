@@ -171,7 +171,7 @@ public class AnimalDaoJdbc implements AnimalDao {
 
     @Override
     public List<Animal> findOlderThan(int years) {
-        return List.of();
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override

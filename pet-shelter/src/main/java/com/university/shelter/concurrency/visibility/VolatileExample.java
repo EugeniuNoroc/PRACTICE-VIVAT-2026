@@ -1,6 +1,6 @@
 package com.university.shelter.concurrency.visibility;
 
-public class VolatimeExample {
+public class VolatileExample {
     private static volatile boolean running = true; // volatile заставляет поток main записывать значение running в основную память, и все обращения к этой переменной будут браться из основной памяти
 
     public static void main(String[] args) throws InterruptedException {

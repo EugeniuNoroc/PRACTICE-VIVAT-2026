@@ -15,9 +15,15 @@ public class BlockingQueueExample {
                 }
                 System.out.println("Произвёл: " + i);
             }
+            try {
+                queue.put(-1);
+                queue.put(-1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         });
 
-        Thread consumer = new Thread(() -> {
+        Thread consumer1 = new Thread(() -> {
             while (true) {
                 Integer item = null; // берёт число, если очередь пуста — ждёт
                 try {
@@ -25,8 +31,26 @@ public class BlockingQueueExample {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("Потребил: " + item);
+                if (item == -1) break;
+                System.out.println("Поток номер один потребил: " + item);
             }
         });
+
+        Thread consumer2 = new Thread(() -> {
+            while (true) {
+                Integer item = null; // берёт число, если очередь пуста — ждёт
+                try {
+                    item = queue.take();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                if (item == -1) break;
+                System.out.println("Поток номер два потребил: " + item);
+            }
+        });
+
+        producer.start();
+        consumer1.start();
+        consumer2.start();
     }
 }

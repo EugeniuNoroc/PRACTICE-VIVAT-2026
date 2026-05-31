@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class InMemoryAnimalDao implements AnimalDao {
     private final Map<UUID, Animal> storage = new ConcurrentHashMap<>();
+    // private final Map<UUID, Animal> storage = new HashMap<>();
 
     @Override
     public void save(Animal animal) {
