@@ -16,6 +16,14 @@ public abstract class Animal implements Comparable<Animal> {
 
     public Animal(UUID id, String name, LocalDate birthDate, double weight, HealthStatus healthStatus){
 
+        // REVIEW[DEBT] (с ревью 1.2): сообщения не говорят, КАКОЕ поле невалидно
+        // ("Поле должно быть заполнено." — какое из трёх?). Добавь имя поля, напр.
+        // "healthStatus не задан", "id не задан", "birthDate не задана". В диагностике
+        // на проде это сэкономит часы. И унифицируй пунктуацию (где-то с точкой, где-то без).
+        // REVIEW[THINK]: birthDate в будущем (LocalDate.now().plusYears(1)) сейчас проходит
+        // валидацию. Логично ли «животное родится завтра»? Если нет — добавь проверку.
+        // REVIEW[GOOD]: equals через getClass()+Objects.equals(id), hashCode и Comparable
+        // (натуральный по birthDate) сделаны корректно — это правильный канон.
         if(healthStatus == null){
             throw new InvalidAnimalDataException("Поле healthStatus должно быть заполнено.");
         }

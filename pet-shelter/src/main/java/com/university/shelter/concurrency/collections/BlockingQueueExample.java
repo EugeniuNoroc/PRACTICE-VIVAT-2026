@@ -3,6 +3,17 @@ package com.university.shelter.concurrency.collections;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * REVIEW (день 4):
+ * [GOOD] Bounded-очередь (capacity 10) + put/take с блокировкой — корректный producer-consumer.
+ *   put ждёт, если полна; take ждёт, если пуста. Это суть BlockingQueue.
+ * [NIT] -1 как "poison pill" — magic number. Что если в данных встретится -1? Обсуди
+ *   альтернативы: отдельный sentinel-объект, Optional, или прерывание потока (interrupt).
+ * [NIT] По плану producer-consumer относится к пакету concurrency.collections, а класс лежит
+ *   в concurrency.basics. Перенеси для порядка.
+ * [THINK] Здесь ровно 2 пилюли на 2 consumer'а. Что сломается, если consumer'ов станет 3?
+ *   Как сделать остановку устойчивой к любому числу потребителей?
+ */
 public class BlockingQueueExample {
     public static void main(String[] args){
         BlockingQueue<Integer> queue = new LinkedBlockingQueue<>(10); // Producer (производитель) → [очередь] → Consumer (потребитель)

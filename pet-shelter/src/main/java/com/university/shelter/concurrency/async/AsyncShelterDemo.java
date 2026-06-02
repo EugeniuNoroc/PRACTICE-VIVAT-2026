@@ -12,6 +12,16 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.*;
 
+/**
+ * REVIEW (день 4):
+ * [GOOD] get(5, TimeUnit.SECONDS) с таймаутом (а не голый get()) — правильно, защищает
+ *   от вечного зависания, если что-то пойдёт не так в пуле.
+ * [THINK] Добавь в список ДВУХ животных с ОДИНАКОВЫМ id и запусти. Что вернёт
+ *   acceptManyAsync и попадут ли оба в DAO? Свяжи это с race condition в
+ *   InMemoryAnimalDao.save (containsKey+put не атомарны).
+ * [NIT] executor.shutdown() есть, но если get(...) бросит TimeoutException — до shutdown
+ *   не дойдём, пул "повиснет". Оберни в try/finally { executor.shutdown(); }.
+ */
 public class AsyncShelterDemo {
     public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException {
         ExecutorService executor = null;

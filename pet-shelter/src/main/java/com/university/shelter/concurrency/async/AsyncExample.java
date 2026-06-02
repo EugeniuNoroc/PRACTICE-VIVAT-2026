@@ -2,6 +2,20 @@ package com.university.shelter.concurrency.async;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * REVIEW (день 4):
+ * [GOOD] Отличный разбор: последовательно (~1519ms) vs параллельно (~507ms), и полный
+ *   pipeline supplyAsync -> thenApply -> thenCompose -> thenCombine -> exceptionally.
+ *   Замеры и сохранённый "до" в комментарии — очень полезно для понимания.
+ * [NIT] thenCombine(future2, ...) переиспользует future2 из верхнего блока — он УЖЕ
+ *   завершён к этому моменту, так что "комбинируешь" с готовым результатом. Для чистоты
+ *   демо заведи отдельный свежий CompletableFuture.
+ * [THINK] Где здесь exceptionally реально сработает? Сейчас — нигде. Подмешай шаг,
+ *   который бросает RuntimeException, и убедись, что ветка ошибки вызывается. Чем
+ *   exceptionally отличается от handle и whenComplete?
+ * [THINK] thenApply vs thenCompose — ты написал верный комментарий. А когда применяется
+ *   thenApplyAsync (с суффиксом Async) и в каком пуле он выполняется?
+ */
 public class AsyncExample {
 
     /*

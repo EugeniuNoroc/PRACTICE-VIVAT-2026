@@ -25,6 +25,20 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+/**
+ * REVIEW[GOOD] (закрыт долг из ревью 1.3): тесты переведены со старого Shelter на
+ * ShelterService(new InMemoryAnimalDao()). Теперь покрыт реально используемый код,
+ * и это наглядно доказывает пользу интерфейса DAO — сервис тестируется БЕЗ базы.
+ * Плюс сами тесты крепкие: AAA, @DisplayName, параметризация (@NullAndEmptySource +
+ * @ValueSource, @CsvSource), assertThatThrownBy. Так держать.
+ *
+ * REVIEW[THINK] (день 4): добавь тест на потокобезопасность acceptManyAsync —
+ * например, 100 потоков добавляют 100 разных животных, ждём, ассертим findAll().size()==100.
+ * А потом — версию с дубликатами id (свяжется с багом TOCTOU в InMemoryAnimalDao.save).
+ * REVIEW[NIT]: тесты findOlderThan/averageAge зависят от LocalDate.now() — со временем
+ * (через пару лет) границы isGreaterThan/isLessThan могут "поехать". Идея на будущее:
+ * внедрять Clock в сервис и фиксировать его в тесте (Clock.fixed(...)) — это тоже DI.
+ */
 public class ShelterTest {
     private ShelterService service;
     private Cat testCat;

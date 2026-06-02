@@ -7,10 +7,16 @@ import java.util.concurrent.TimeUnit;
 public class SynchronizedCounter {
     private int value = 0;
 
+    // REVIEW[GOOD] (день 4): synchronized на increment закрывает гонку read-modify-write.
     public synchronized void increment() {
         value++;
     }
 
+    // REVIEW[THINK] (день 4): getValue НЕ synchronized и не volatile. Чтение int атомарно,
+    // но без синхронизации/volatile другой поток может увидеть УСТАРЕВШЕЕ значение
+    // (проблема видимости / happens-before). Здесь main делает awaitTermination перед
+    // чтением, поэтому "случайно" ок. Но в общем случае это ловушка — как бы ты гарантировал
+    // видимость? (synchronized getValue, либо AtomicInteger как в AtomicCounter)
     public int getValue() {
         return value;
     }
