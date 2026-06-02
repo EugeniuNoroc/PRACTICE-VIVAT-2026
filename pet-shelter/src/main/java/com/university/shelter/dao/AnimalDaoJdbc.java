@@ -19,6 +19,21 @@ public class AnimalDaoJdbc implements AnimalDao {
 
     private static final Logger logger = LoggerFactory.getLogger(AnimalDaoJdbc.class);
 
+    /**
+     * REVIEW[BUG] (W1, день 3): метод вызывается в цикле из findAll()/findByType() и на
+     * КАЖДОЕ животное делает отдельный SELECT в dogs/cats. Для N животных это 1 + N
+     * запросов к БД — классическая проблема N+1 (детально разберём в W3 на Hibernate,
+     * но увидеть её "вживую" в своём коде — бесценно).
+     *   Прикинь: для 100 животных это 101 запрос. Для 10 000 — 10 001.
+     *   Решение: один JOIN — animals LEFT JOIN dogs LEFT JOIN cats, различать по полю type.
+     *
+     * REVIEW[BUG]: внутренние ResultSet (dogRs/catRs) НЕ обёрнуты в try-with-resources —
+     * закрываются только неявно вместе со Statement. Оберни явно (см. ниже).
+     *
+     * REVIEW[THINK]: метод держит ОДНО соединение и открывает на нём второй Statement,
+     * пока ещё не дочитан внешний ResultSet (в findAll). Почему это хрупко, когда
+     * появится connection pool или транзакция? (подсказка: курсор + один Connection)
+     */
     private Animal mapAnimal(ResultSet rs, Connection conn) throws SQLException {
         UUID animalId = UUID.fromString(rs.getString("id"));
         String name = rs.getString("name");
@@ -49,6 +64,22 @@ public class AnimalDaoJdbc implements AnimalDao {
         throw new DaoException("Неизвестный тип животного: " + type, null);
     }
 
+    /**
+     * REVIEW[BUG] — подвеска на день 5 (тикет 1.5, транзакции):
+     * Два INSERT (в animals, затем в dogs/cats) выполняются с autoCommit=true,
+     * т.е. КАЖДЫЙ коммитится сам по себе. Если первый прошёл, а второй упал —
+     * в animals останется "сирота" без строки в dogs/cats. Битая консистентность.
+     * Нужна транзакция: conn.setAutoCommit(false); ... conn.commit(); catch -> conn.rollback();
+     *
+     * REVIEW[DEBT]: дубликат id сейчас прилетит как SQLException (нарушение PK) и
+     * завернётся в общий DaoException. А InMemoryAnimalDao в этом случае бросает
+     * DuplicateAnimalException — поведение двух реализаций РАЗНОЕ (нарушение LSP).
+     * Лови SQLState "23505" (unique_violation) и бросай DuplicateAnimalException:
+     *   catch (SQLException e) {
+     *       if ("23505".equals(e.getSQLState())) throw new DuplicateAnimalException(animal.getId());
+     *       throw new DaoException("Ошибка при сохранении животного", e);
+     *   }
+     */
     @Override
     public void save(Animal animal) {
         try (Connection conn = ConnectionFactory.getConnection();
@@ -157,6 +188,12 @@ public class AnimalDaoJdbc implements AnimalDao {
         try (Connection conn = ConnectionFactory.getConnection()) {
             try(PreparedStatement stmt = conn.prepareStatement("DELETE FROM animals WHERE id = ?")) {
                 stmt.setObject(1, id);
+                // REVIEW[BUG] (W1, день 3): executeUpdate() возвращает число удалённых строк,
+                // но мы его игнорируем -> удаление несуществующего id проходит МОЛЧА.
+                // А InMemoryAnimalDao.delete в этом случае кидает AnimalNotFoundException =>
+                // две реализации ведут себя по-разному (LSP). Сделай как в update():
+                //   int affected = stmt.executeUpdate();
+                //   if (affected == 0) throw new AnimalNotFoundException(id);
                 stmt.executeUpdate();
             }
         } catch (SQLException e) {
@@ -164,6 +201,15 @@ public class AnimalDaoJdbc implements AnimalDao {
         }
     }
 
+    // ========================================================================
+    // REVIEW[BUG] (W1, день 3): четыре метода интерфейса AnimalDao НЕ реализованы.
+    // Это нарушение LSP: код, работающий через AnimalDao, упадёт на JDBC-реализации,
+    // хотя на InMemory работал. Раньше findOlderThan ВРАЛ молча (возвращал пустой
+    // список) — сейчас честно бросает UnsupportedOperationException, это уже лучше.
+    // Но решить надо по-настоящему (см. JavaDoc в AnimalDao):
+    //   а) либо реализовать в SQL (ORDER BY weight DESC LIMIT 1; AVG(...); GROUP BY type);
+    //   б) либо вынести аналитику из интерфейса DAO в сервис.
+    // ========================================================================
     @Override
     public Optional<Animal> findHeaviest() {
         throw new UnsupportedOperationException("Not implemented yet");

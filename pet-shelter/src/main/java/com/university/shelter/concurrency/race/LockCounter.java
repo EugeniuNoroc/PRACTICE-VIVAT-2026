@@ -9,6 +9,8 @@ public class LockCounter {
     private int value = 0;
     private final ReentrantLock lock = new ReentrantLock();
 
+    // REVIEW[GOOD] (день 4): lock.lock() + try/finally { unlock() } — канонический и
+    // правильный паттерн. unlock именно в finally, иначе при исключении блокировка зависнет.
     public void increment() {
         lock.lock();
         try {
@@ -25,6 +27,14 @@ public class LockCounter {
     public static void main(String[] args) throws InterruptedException {
         long start = System.nanoTime();
 
+        // REVIEW[BUG] (день 4): COPY-PASTE из SynchronizedCounter.main!
+        // Здесь создаётся SynchronizedCounter, а НЕ LockCounter — значит бенчмарк меряет
+        // synchronized, а не ReentrantLock. Сравнение lock vs synchronized сейчас
+        // бессмысленно: обе цифры про synchronized. Должно быть:
+        //   LockCounter counter = new LockCounter();
+        // REVIEW[THINK]: ты не заметил, что цифры в SynchronizedCounter и LockCounter
+        // одинаковые. Главная привычка бенчмаркинга — СМОТРЕТЬ на результат и спрашивать
+        // "а почему именно так?", а не просто запускать.
         SynchronizedCounter counter = new SynchronizedCounter();
         ExecutorService executor = Executors.newFixedThreadPool(10);
 

@@ -12,6 +12,18 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * REVIEW[DEBT] (с ревью 1.1/1.2, всё ещё не сделано): метод main разросся (>100 строк)
+ * и делает всё сразу: рисует меню, парсит ввод, создаёт объекты, дёргает сервис.
+ * Много дублирования между ветками "создать кошку" и "создать собаку".
+ *
+ * Выдели методы: Cat readCat(Scanner), Dog readDog(Scanner) (а лучше отдельный класс
+ * ConsoleMenu / InputReader). В тикете 1.5 ввода прибавится (партии животных, опции
+ * транзакций) — без рефакторинга станет совсем тяжело читать и менять.
+ *
+ * REVIEW[NIT]: переменная shelter имеет тип ShelterService — имя вводит в заблуждение,
+ * назови service.
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -30,6 +42,9 @@ public class Main {
 
                 if (choice == 1) {
                     System.out.println("Введите 1 если кошка, 2 если собака");
+                    // REVIEW[NIT] (с ревью 1.1): переменная choice переиспользуется и для
+                    // главного меню, и для этого подменю. Работает, но запутывает (после
+                    // выхода из ветки choice уже не "пункт меню"). Заведи отдельную subChoice.
                     choice = scanner.nextInt();
                     scanner.nextLine(); // съедает перенос строки который крашит все
                     if (choice == 1) {
@@ -104,6 +119,9 @@ public class Main {
                 } else if (choice == 0) {
                     break;
                 }
+            // REVIEW[GOOD]: разделение catch ShelterException (ожидаемая бизнес-ошибка)
+            // и catch Exception (неожиданная) + очистка буфера scanner.nextLine() после
+            // кривого ввода — грамотно. Это спасает от вечного цикла на scanner.nextInt("abc").
             } catch (ShelterException exception) {
                     System.out.println("Ошибка " + exception.getMessage());
                 } catch (Exception exception) {

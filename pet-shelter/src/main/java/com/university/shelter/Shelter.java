@@ -8,6 +8,18 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * REVIEW[DEBT] (с ревью 1.3): ЭТОТ КЛАСС — МЁРТВЫЙ КОД, его надо удалить.
+ *
+ * Main давно работает через ShelterService + DAO, а ShelterTest ты уже (молодец!)
+ * перевёл на ShelterService(new InMemoryAnimalDao()). Значит Shelter больше НИКТО
+ * не использует — ни прод, ни тесты. Он только:
+ *   - вносит путаницу (два класса с почти одинаковыми методами),
+ *   - дублирует ошибку расчёта возраста (findOlderThan/averageAge — см. InMemoryAnimalDao),
+ *   - накручивает мнимое покрытие.
+ *
+ * Действие: git rm этот файл. Вся его логика уже живёт в InMemoryAnimalDao.
+ */
 public class Shelter {
     private final Map<UUID, Animal> animals;
 
