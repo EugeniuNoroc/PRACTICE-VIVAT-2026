@@ -5,6 +5,7 @@ import com.university.shelter.exception.DuplicateAnimalException;
 import com.university.shelter.model.Animal;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -69,15 +70,14 @@ public class InMemoryAnimalDao implements AnimalDao {
     public List<Animal> findOlderThan(int years) {
         return storage.values()
                 .stream()
-                .filter(animal -> years < (LocalDate.now().getYear() - animal.getBirthDate().getYear()))
-                .collect(Collectors.toList()); // Можно заменить на .toList() из Java 16+
+                .filter(animal -> years < (ChronoUnit.YEARS.between(animal.getBirthDate(), LocalDate.now()))).toList();
     }
 
     @Override
     public double averageAge() {
         return storage.values()
                 .stream()
-                .mapToDouble(a -> LocalDate.now().getYear() - a.getBirthDate().getYear())
+                .mapToDouble(a -> ChronoUnit.YEARS.between(a.getBirthDate(), LocalDate.now()))
                 .average().orElse(0);
     }
 

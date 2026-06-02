@@ -51,35 +51,44 @@ public class AnimalDaoJdbc implements AnimalDao {
 
     @Override
     public void save(Animal animal) {
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(
-                     "INSERT INTO animals (id, name, birth_date, weight, health_status, type) VALUES (?, ?, ?, ?, ?, ?)")) {
+        try (Connection conn = ConnectionFactory.getConnection()) {
+            conn.setAutoCommit(false);
+            try (PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO animals (id, name, birth_date, weight, health_status, type) VALUES (?, ?, ?, ?, ?, ?)")) {
 
-            stmt.setObject(1, animal.getId());
-            stmt.setString(2, animal.getName());
-            stmt.setDate(3, Date.valueOf(animal.getBirthDate()));
-            stmt.setDouble(4, animal.getWeight());
-            stmt.setString(5, animal.getHealthStatus().name());
-            stmt.setString(6, animal.getClass().getSimpleName());
-            logger.info("Сохраняем животное: {}", animal.getName());
-            stmt.executeUpdate();
-            if (animal instanceof Dog dog) {
-                try(PreparedStatement dogStmt = conn.prepareStatement("INSERT INTO dogs (animal_id, breed, obedience_level) VALUES (?, ?, ?)")) {
-                    dogStmt.setObject(1, dog.getId());
-                    dogStmt.setObject(2, dog.getBreed());
-                    dogStmt.setObject(3, dog.getObedienceLevel());
-                    dogStmt.executeUpdate();
+                stmt.setObject(1, animal.getId());
+                stmt.setString(2, animal.getName());
+                stmt.setDate(3, Date.valueOf(animal.getBirthDate()));
+                stmt.setDouble(4, animal.getWeight());
+                stmt.setString(5, animal.getHealthStatus().name());
+                stmt.setString(6, animal.getClass().getSimpleName());
+                logger.info("Сохраняем животное: {}", animal.getName());
+                stmt.executeUpdate();
+
+                if (animal instanceof Dog dog) {
+                    try (PreparedStatement dogStmt = conn.prepareStatement(
+                            "INSERT INTO dogs (animal_id, breed, obedience_level) VALUES (?, ?, ?)")) {
+                        dogStmt.setObject(1, dog.getId());
+                        dogStmt.setObject(2, dog.getBreed());
+                        dogStmt.setObject(3, dog.getObedienceLevel());
+                        dogStmt.executeUpdate();
+                    }
+                } else if (animal instanceof Cat cat) {
+                    try (PreparedStatement catStmt = conn.prepareStatement(
+                            "INSERT INTO cats (animal_id, breed, indoor_only) VALUES (?, ?, ?)")) {
+                        catStmt.setObject(1, cat.getId());
+                        catStmt.setObject(2, cat.getBreed());
+                        catStmt.setObject(3, cat.isIndoorOnly());
+                        catStmt.executeUpdate();
+                    }
                 }
-            } else if (animal instanceof Cat cat) {
-                try(PreparedStatement catStmt = conn.prepareStatement("INSERT INTO cats (animal_id, breed, indoor_only) VALUES (?, ?, ?)")) {
-                    catStmt.setObject(1, cat.getId());
-                    catStmt.setObject(2, cat.getBreed());
-                    catStmt.setObject(3, cat.isIndoorOnly());
-                    catStmt.executeUpdate();
-                }
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw new DaoException("Ошибка при сохранении животного", e);
             }
         } catch (SQLException e) {
-            throw new DaoException("Ошибка при сохранении животного", e);
+            throw new DaoException("Ошибка подключения", e);
         }
     }
 
@@ -157,7 +166,10 @@ public class AnimalDaoJdbc implements AnimalDao {
         try (Connection conn = ConnectionFactory.getConnection()) {
             try(PreparedStatement stmt = conn.prepareStatement("DELETE FROM animals WHERE id = ?")) {
                 stmt.setObject(1, id);
-                stmt.executeUpdate();
+                int deleted = stmt.executeUpdate();
+                if (deleted == 0) {
+                    throw new AnimalNotFoundException(id);
+                }
             }
         } catch (SQLException e) {
             throw new DaoException("Ошибка при удалении животного", e);

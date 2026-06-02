@@ -13,6 +13,42 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class Main {
+
+    private static Cat readCat(Scanner scanner){
+        System.out.println("Введите имя кота/кошки:");
+        String name = scanner.nextLine();
+        System.out.println("Введите вес кота/кошки:");
+        double weight = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.println("Введите состояние здоровья кота/кошки(SICK, HEALTHY or RECOVERING:");
+        HealthStatus healthStatus = HealthStatus.valueOf(scanner.next());
+        System.out.println("Введите дату рождения кота/кошки(xxxx-xx-xx):");
+        LocalDate date = LocalDate.parse(scanner.next());
+        System.out.println("Введите домашняя/ий ли кот/кошка (true или false):");
+        boolean indoorOnly = Boolean.parseBoolean(scanner.next());
+        System.out.println("Введите породу кота/кошки:");
+        String breed = scanner.nextLine();
+        return new Cat(UUID.randomUUID(), name, date, weight, healthStatus, breed, indoorOnly);
+    }
+
+    private static Dog readDog(Scanner scanner){
+        System.out.println("Введите имя собаки:");
+        String name = scanner.nextLine();
+        System.out.println("Введите вес собаки:");
+        double weight = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.println("Введите состояние здоровья собаки(SICK, HEALTHY or RECOVERING:");
+        HealthStatus healthStatus = HealthStatus.valueOf(scanner.next());
+        System.out.println("Введите дату рождения собаки(xxxx-xx-xx):");
+        LocalDate date = LocalDate.parse(scanner.next());
+        System.out.println("Введите уровень послушания собаки:");
+        int obedienceLevel = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Введите породу собаки:");
+        String breed = scanner.nextLine();
+        return new Dog(UUID.randomUUID(), name, date, weight, healthStatus, breed, obedienceLevel);
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ShelterService service = new ShelterService(new AnimalDaoJdbc());
@@ -33,40 +69,9 @@ public class Main {
                     choice = scanner.nextInt();
                     scanner.nextLine(); // съедает перенос строки который крашит все
                     if (choice == 1) {
-                        System.out.println("Введите имя кота/кошки:");
-                        String name = scanner.nextLine();
-                        System.out.println("Введите вес кота/кошки:");
-                        double weight = scanner.nextDouble();
-                        scanner.nextLine();
-                        System.out.println("Введите состояние здоровья кота/кошки(SICK, HEALTHY or RECOVERING:");
-                        HealthStatus healthStatus = HealthStatus.valueOf(scanner.next());
-                        System.out.println("Введите дату рождения кота/кошки(xxxx-xx-xx):");
-                        LocalDate date = LocalDate.parse(scanner.next());
-                        System.out.println("Введите домашняя/ий ли кот/кошка (true или false):");
-                        boolean indoorOnly = Boolean.parseBoolean(scanner.next());
-                        System.out.println("Введите породу кота/кошки:");
-                        String breed = scanner.nextLine();
-                        Cat cat = new Cat(UUID.randomUUID(), name, date, weight, healthStatus, breed, indoorOnly);
-
-                        service.accept(cat);
+                        service.accept(readCat(scanner));
                     } else if (choice == 2) {
-                        System.out.println("Введите имя собаки:");
-                        String name = scanner.nextLine();
-                        System.out.println("Введите вес собаки:");
-                        double weight = scanner.nextDouble();
-                        scanner.nextLine();
-                        System.out.println("Введите состояние здоровья собаки(SICK, HEALTHY or RECOVERING:");
-                        HealthStatus healthStatus = HealthStatus.valueOf(scanner.next());
-                        System.out.println("Введите дату рождения собаки(xxxx-xx-xx):");
-                        LocalDate date = LocalDate.parse(scanner.next());
-                        System.out.println("Введите уровень послушания собаки:");
-                        int obedienceLevel = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println("Введите породу собаки:");
-                        String breed = scanner.nextLine();
-                        Dog dog = new Dog(UUID.randomUUID(), name, date, weight, healthStatus, breed, obedienceLevel);
-
-                        service.accept(dog);
+                        service.accept(readDog(scanner));
                     }
                 } else if (choice == 2) {
                     List<Animal> all = service.findAll();
