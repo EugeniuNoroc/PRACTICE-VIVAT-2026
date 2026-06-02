@@ -20,7 +20,7 @@ public class UnsafeCounter {
 
         UnsafeCounter counter = new UnsafeCounter();
         ExecutorService executor = Executors.newFixedThreadPool(10);
-        for(int i = 0; i < 1000000; i++){
+        for(int i = 0; i < 1000; i++){
             executor.submit(() -> counter.increment());
         }
         executor.shutdown();

@@ -15,10 +15,8 @@ public class InMemoryAnimalDao implements AnimalDao {
 
     @Override
     public void save(Animal animal) {
-        if (storage.containsKey(animal.getId())) {
+        if (storage.putIfAbsent(animal.getId(), animal) != null) {
             throw new DuplicateAnimalException(animal.getId());
-        } else {
-            storage.put(animal.getId(), animal);
         }
     }
 

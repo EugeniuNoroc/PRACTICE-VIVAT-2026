@@ -17,11 +17,11 @@ public abstract class Animal implements Comparable<Animal> {
     public Animal(UUID id, String name, LocalDate birthDate, double weight, HealthStatus healthStatus){
 
         if(healthStatus == null){
-            throw new InvalidAnimalDataException("Поле должно быть заполнено.");
+            throw new InvalidAnimalDataException("Поле healthStatus должно быть заполнено.");
         }
 
         if(id == null){
-            throw new InvalidAnimalDataException("Поле должно быть заполнено.");
+            throw new InvalidAnimalDataException("Поле id должно быть заполнено.");
         }
 
         if(name == null || name.isBlank()){
@@ -29,7 +29,7 @@ public abstract class Animal implements Comparable<Animal> {
         }
 
         if(birthDate == null){
-            throw new InvalidAnimalDataException("Поле должно быть заполнено.");
+            throw new InvalidAnimalDataException("Поле birthDate должно быть заполнено.");
         }
 
         if(weight <= 0){

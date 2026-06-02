@@ -1,4 +1,4 @@
-package com.university.shelter.concurrency.basics;
+package com.university.shelter.concurrency.collections;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

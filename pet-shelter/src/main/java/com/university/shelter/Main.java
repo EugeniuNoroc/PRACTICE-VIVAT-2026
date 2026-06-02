@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ShelterService shelter = new ShelterService(new AnimalDaoJdbc());
+        ShelterService service = new ShelterService(new AnimalDaoJdbc());
             while (true) {
                 try {
                 System.out.println("1. Принять животное");
@@ -43,12 +43,12 @@ public class Main {
                         System.out.println("Введите дату рождения кота/кошки(xxxx-xx-xx):");
                         LocalDate date = LocalDate.parse(scanner.next());
                         System.out.println("Введите домашняя/ий ли кот/кошка (true или false):");
-                        Boolean indoorOnly = Boolean.parseBoolean(scanner.next());
+                        boolean indoorOnly = Boolean.parseBoolean(scanner.next());
                         System.out.println("Введите породу кота/кошки:");
                         String breed = scanner.nextLine();
                         Cat cat = new Cat(UUID.randomUUID(), name, date, weight, healthStatus, breed, indoorOnly);
 
-                        shelter.accept(cat);
+                        service.accept(cat);
                     } else if (choice == 2) {
                         System.out.println("Введите имя собаки:");
                         String name = scanner.nextLine();
@@ -66,10 +66,10 @@ public class Main {
                         String breed = scanner.nextLine();
                         Dog dog = new Dog(UUID.randomUUID(), name, date, weight, healthStatus, breed, obedienceLevel);
 
-                        shelter.accept(dog);
+                        service.accept(dog);
                     }
                 } else if (choice == 2) {
-                    List<Animal> all = shelter.findAll();
+                    List<Animal> all = service.findAll();
                     for (Animal a : all) {
                         System.out.println(a);
                     }
@@ -77,7 +77,7 @@ public class Main {
                     System.out.println("Введите айди животного:");
                     String input = scanner.next();
                     UUID uuid = UUID.fromString(input);
-                    shelter.findById(uuid).ifPresentOrElse(
+                    service.findById(uuid).ifPresentOrElse(
                             a -> System.out.println(a),
                             () -> System.out.println("Животное не найдено")
                     );
@@ -85,18 +85,18 @@ public class Main {
                     System.out.println("Введите айди животного:");
                     String input = scanner.next();
                     UUID uuid = UUID.fromString(input);
-                    shelter.release(uuid);
+                    service.release(uuid);
                 } else if (choice == 5) {
                     System.out.println("Введите 1 если поиск по котам, 2 если по собакам:");
                     choice = scanner.nextInt();
                     scanner.nextLine();
                     if (choice == 1) {
-                        List<Animal> all = shelter.findByType(Cat.class);
+                        List<Animal> all = service.findByType(Cat.class);
                         for (Animal a : all) {
                             System.out.println(a);
                         }
                     } else if (choice == 2) {
-                        List<Animal> all = shelter.findByType(Dog.class);
+                        List<Animal> all = service.findByType(Dog.class);
                         for (Animal a : all) {
                             System.out.println(a);
                         }

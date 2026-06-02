@@ -25,7 +25,7 @@ public class LockCounter {
     public static void main(String[] args) throws InterruptedException {
         long start = System.nanoTime();
 
-        SynchronizedCounter counter = new SynchronizedCounter();
+        LockCounter counter = new LockCounter();
         ExecutorService executor = Executors.newFixedThreadPool(10);
 
         for(int i = 0; i < 1000000; i++){

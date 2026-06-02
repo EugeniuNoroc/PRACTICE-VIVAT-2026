@@ -1,0 +1,1032 @@
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+new file mode 100644
+--- /dev/null	(date 1778923652838)
++++ b/.idea/encodings.xml	(date 1778923652838)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/Project_Default.xml b/.idea/inspectionProfiles/Project_Default.xml
+new file mode 100644
+--- /dev/null	(date 1779965967646)
++++ b/.idea/inspectionProfiles/Project_Default.xml	(date 1779965967646)
+@@ -0,0 +1,8 @@
++<component name="InspectionProjectProfileManager">
++  <profile version="1.0">
++    <option name="myName" value="Project Default" />
++    <inspection_tool class="AutoCloseableResource" enabled="true" level="WARNING" enabled_by_default="true">
++      <option name="METHOD_MATCHER_CONFIG" value="java.util.Formatter,format,java.io.Writer,append,com.google.common.base.Preconditions,checkNotNull,org.hibernate.Session,close,java.io.PrintWriter,printf,java.io.PrintStream,printf,java.lang.foreign.Arena,ofAuto,java.lang.foreign.Arena,global,java.util.concurrent.Executors,newSingleThreadExecutor" />
++    </inspection_tool>
++  </profile>
++</component>
+\ No newline at end of file
+Index: .idea/dataSources/data_sources_history.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources/data_sources_history.xml b/.idea/dataSources/data_sources_history.xml
+new file mode 100644
+--- /dev/null	(date 1780230755298)
++++ b/.idea/dataSources/data_sources_history.xml	(date 1780230755298)
+@@ -0,0 +1,82 @@
++<DataSourcesHistory>
++  <DataSourceFromHistory isRemovedFromProject="false">
++    <data-source source="LOCAL" name="shelter_db@localhost [2]" uuid="7379cbbf-8f87-455a-a615-18808e18e1d3">
++      <database-info product="PostgreSQL" version="18.3" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="18.3" exact-driver-version="42.7">
++        <identifier-quote-string>&quot;</identifier-quote-string>
++      </database-info>
++      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
++      <driver-ref>postgresql</driver-ref>
++      <synchronize>true</synchronize>
++      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
++      <jdbc-url>jdbc:postgresql://localhost:5432/shelter_db</jdbc-url>
++      <jdbc-additional-properties>
++        <property name="com.intellij.clouds.kubernetes.db.host.port" />
++        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
++        <property name="com.intellij.clouds.kubernetes.db.container.port" />
++      </jdbc-additional-properties>
++      <secret-storage>master_key</secret-storage>
++      <user-name>postgres</user-name>
++      <schema-mapping>
++        <introspection-scope>
++          <node negative="1">
++            <node kind="database" qname="@">
++              <node kind="schema" qname="@" />
++            </node>
++            <node kind="database" qname="postgres">
++              <node kind="schema" qname="public" />
++            </node>
++          </node>
++        </introspection-scope>
++      </schema-mapping>
++      <working-dir>$ProjectFileDir$</working-dir>
++    </data-source>
++  </DataSourceFromHistory>
++  <DataSourceFromHistory isRemovedFromProject="false">
++    <data-source source="LOCAL" name="shelter_db@localhost" uuid="7958c4a9-7066-4e9e-84e9-c495dea378d4">
++      <database-info product="PostgreSQL" version="18.3" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="18.3" exact-driver-version="42.7">
++        <identifier-quote-string>&quot;</identifier-quote-string>
++      </database-info>
++      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
++      <driver-ref>postgresql</driver-ref>
++      <synchronize>true</synchronize>
++      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
++      <jdbc-url>jdbc:postgresql://localhost:5432/shelter_db</jdbc-url>
++      <jdbc-additional-properties>
++        <property name="com.intellij.clouds.kubernetes.db.host.port" />
++        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
++        <property name="com.intellij.clouds.kubernetes.db.container.port" />
++      </jdbc-additional-properties>
++      <secret-storage>master_key</secret-storage>
++      <user-name>shelter_user</user-name>
++      <schema-mapping>
++        <introspection-scope>
++          <node kind="database" qname="@">
++            <node kind="schema" qname="@" />
++          </node>
++        </introspection-scope>
++      </schema-mapping>
++      <working-dir>$ProjectFileDir$</working-dir>
++    </data-source>
++  </DataSourceFromHistory>
++  <DataSourceFromHistory isRemovedFromProject="true">
++    <data-source source="LOCAL" name="postgres@localhost [2]" uuid="8e19e944-4221-44c9-bb72-c068fbb2100d">
++      <database-info product="PostgreSQL" version="18.3" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="18.3" exact-driver-version="42.7">
++        <identifier-quote-string>&quot;</identifier-quote-string>
++      </database-info>
++      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
++      <driver-ref>postgresql</driver-ref>
++      <synchronize>true</synchronize>
++      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
++      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
++      <jdbc-additional-properties>
++        <property name="com.intellij.clouds.kubernetes.db.host.port" />
++        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
++        <property name="com.intellij.clouds.kubernetes.db.container.port" />
++      </jdbc-additional-properties>
++      <secret-storage>master_key</secret-storage>
++      <user-name>postgres</user-name>
++      <schema-mapping />
++      <working-dir>$ProjectFileDir$</working-dir>
++    </data-source>
++  </DataSourceFromHistory>
++</DataSourcesHistory>
+\ No newline at end of file
+Index: untitled/.idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/untitled/.idea/misc.xml b/untitled/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1778923652852)
++++ b/untitled/.idea/misc.xml	(date 1778923652852)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="temurin-21" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/markdown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/markdown.xml b/.idea/markdown.xml
+new file mode 100644
+--- /dev/null	(date 1779967210248)
++++ b/.idea/markdown.xml	(date 1779967210248)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="MarkdownSettings">
++    <option name="showProblemsInCodeBlocks" value="false" />
++  </component>
++</project>
+\ No newline at end of file
+Index: pet-shelter/.idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pet-shelter/.idea/encodings.xml b/pet-shelter/.idea/encodings.xml
+new file mode 100644
+--- /dev/null	(date 1778923652448)
++++ b/pet-shelter/.idea/encodings.xml	(date 1778923652448)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+new file mode 100644
+--- /dev/null	(date 1779612424370)
++++ b/.idea/dataSources.xml	(date 1779612424370)
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
++    <data-source source="LOCAL" name="shelter_db@localhost [2]" uuid="7379cbbf-8f87-455a-a615-18808e18e1d3">
++      <driver-ref>postgresql</driver-ref>
++      <synchronize>true</synchronize>
++      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
++      <jdbc-url>jdbc:postgresql://localhost:5432/shelter_db</jdbc-url>
++      <jdbc-additional-properties>
++        <property name="com.intellij.clouds.kubernetes.db.host.port" />
++        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
++        <property name="com.intellij.clouds.kubernetes.db.container.port" />
++      </jdbc-additional-properties>
++      <working-dir>$ProjectFileDir$</working-dir>
++    </data-source>
++    <data-source source="LOCAL" name="shelter_db@localhost" uuid="7958c4a9-7066-4e9e-84e9-c495dea378d4">
++      <driver-ref>postgresql</driver-ref>
++      <synchronize>true</synchronize>
++      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
++      <jdbc-url>jdbc:postgresql://localhost:5432/shelter_db</jdbc-url>
++      <jdbc-additional-properties>
++        <property name="com.intellij.clouds.kubernetes.db.host.port" />
++        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
++        <property name="com.intellij.clouds.kubernetes.db.container.port" />
++      </jdbc-additional-properties>
++      <working-dir>$ProjectFileDir$</working-dir>
++    </data-source>
++  </component>
++</project>
+\ No newline at end of file
+Index: pet-shelter/.idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pet-shelter/.idea/vcs.xml b/pet-shelter/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1778923652493)
++++ b/pet-shelter/.idea/vcs.xml	(date 1778923652493)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1779610216856)
++++ b/.idea/misc.xml	(date 1779610216856)
+@@ -0,0 +1,53 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
++  <component name="NullableNotNullManager">
++    <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
++    <option name="myDefaultNotNull" value="org.jetbrains.annotations.NotNull" />
++    <option name="myOrdered" value="false" />
++    <option name="myNullables">
++      <value>
++        <list size="11">
++          <item index="0" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
++          <item index="1" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
++          <item index="2" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
++          <item index="3" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
++          <item index="4" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
++          <item index="5" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
++          <item index="6" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
++          <item index="7" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
++          <item index="8" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
++          <item index="9" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
++          <item index="10" class="java.lang.String" itemvalue="org.springframework.lang.Nullable" />
++        </list>
++      </value>
++    </option>
++    <option name="myNotNulls">
++      <value>
++        <list size="11">
++          <item index="0" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
++          <item index="1" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
++          <item index="2" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
++          <item index="3" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
++          <item index="4" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
++          <item index="5" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
++          <item index="6" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
++          <item index="7" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
++          <item index="8" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
++          <item index="9" class="java.lang.String" itemvalue="lombok.NonNull" />
++          <item index="10" class="java.lang.String" itemvalue="org.springframework.lang.NonNull" />
++        </list>
++      </value>
++    </option>
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="temurin-21" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1778923652546)
++++ b/.idea/vcs.xml	(date 1778923652546)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: pet-shelter/.idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pet-shelter/.idea/misc.xml b/pet-shelter/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1778923652519)
++++ b/pet-shelter/.idea/misc.xml	(date 1778923652519)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="temurin-21" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/db-forest-config.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/db-forest-config.xml b/.idea/db-forest-config.xml
+new file mode 100644
+--- /dev/null	(date 1779612424372)
++++ b/.idea/db-forest-config.xml	(date 1779612424372)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="db-forest-configuration">
++    <data version="2">.
++	----------------------------------------
++	1:0:7379cbbf-8f87-455a-a615-18808e18e1d3
++	2:0:7958c4a9-7066-4e9e-84e9-c495dea378d4
++		.</data>
++  </component>
++</project>
+\ No newline at end of file
+Index: untitled/.idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/untitled/.idea/.gitignore b/untitled/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1778923652595)
++++ b/untitled/.idea/.gitignore	(date 1778923652595)
+@@ -0,0 +1,10 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Ignored default folder with query files
++/queries/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+new file mode 100644
+--- /dev/null	(date 1780235563306)
++++ b/.idea/workspace.xml	(date 1780235563306)
+@@ -0,0 +1,403 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
++  <component name="ChangeListManager">
++    <list default="true" id="f913e405-9c74-4f7d-8d8b-0ade6010e995" name="Changes" comment="add concurrency examples and synchronization demos: BlockingQueueExample, CallableExample, RunnableExample, MapRace, FixedPoolExample, AtomicCounter, LockCounter, RaceConditionStressTest, SynchronizedCounter, UnsafeCounter and VolatileExample">
++      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/dataSources/data_sources_history.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/db-forest-config.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/markdown.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/pet-shelter/.idea/.gitignore" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/pet-shelter/.idea/encodings.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/pet-shelter/.idea/misc.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/pet-shelter/.idea/vcs.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/pet-shelter/src/main/java/org/example/Main.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/java/com/university/shelter/concurrency/async/AsyncExample.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/java/com/university/shelter/concurrency/async/AsyncShelterDemo.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/.gitignore" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/.idea/.gitignore" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/.idea/encodings.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/.idea/misc.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/.idea/vcs.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/pom.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/university/shelter/ShelterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/university/shelter/ShelterService.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/university/shelter/concurrency/basics/BlockingQueueExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/university/shelter/concurrency/basics/BlockingQueueExample.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/university/shelter/concurrency/basics/RunnableExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/university/shelter/concurrency/basics/RunnableExample.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/university/shelter/concurrency/visibility/VolatimeExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/university/shelter/concurrency/visibility/VolatileExample.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/university/shelter/dao/AnimalDaoJdbc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/university/shelter/dao/AnimalDaoJdbc.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/university/shelter/dao/InMemoryAnimalDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/university/shelter/dao/InMemoryAnimalDao.java" afterDir="false" />
++    </list>
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="EmbeddingIndexingInfo">
++    <option name="cachedIndexableFilesCount" value="81" />
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Interface" />
++        <option value="Record" />
++        <option value="Exception" />
++        <option value="Class" />
++      </list>
++    </option>
++  </component>
++  <component name="Git.Settings">
++    <option name="PUSH_AUTO_UPDATE" value="true" />
++    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
++  </component>
++  <component name="GitHubPullRequestSearchHistory">{
++  &quot;lastFilter&quot;: {
++    &quot;state&quot;: &quot;OPEN&quot;,
++    &quot;assignee&quot;: &quot;EugeniuNoroc&quot;
++  }
++}</component>
++  <component name="GithubPullRequestsUISettings">{
++  &quot;selectedUrlAndAccountId&quot;: {
++    &quot;url&quot;: &quot;https://github.com/EugeniuNoroc/Practic.git&quot;,
++    &quot;accountId&quot;: &quot;e6d3f0a6-b814-44a0-8625-5bc96c1b2aec&quot;
++  }
++}</component>
++  <component name="KubernetesApiProvider">{}</component>
++  <component name="McpProjectServerCommands">
++    <commands />
++    <urls />
++  </component>
++  <component name="ProblemsViewState">
++    <option name="selectedTabId" value="CurrentFile" />
++  </component>
++  <component name="ProjectColorInfo">{
++  &quot;associatedIndex&quot;: 6,
++  &quot;fromUser&quot;: false
++}</component>
++  <component name="ProjectId" id="3DcbPdJnQDHfSjObd6ppP9YzhR2" />
++  <component name="ProjectLevelVcsManager">
++    <ConfirmationsSetting value="2" id="Add" />
++  </component>
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.AsyncExample.executor": "Run",
++    "Application.AsyncShelterDemo.executor": "Run",
++    "Application.AtomicCounter.executor": "Run",
++    "Application.BlockingQueueExample.executor": "Run",
++    "Application.CallableExample.executor": "Run",
++    "Application.FixedPoolExample.executor": "Run",
++    "Application.LockCounter.executor": "Run",
++    "Application.Main.executor": "Run",
++    "Application.MapRace.executor": "Run",
++    "Application.RaceConditionStressTest.executor": "Run",
++    "Application.RunnableExample.executor": "Run",
++    "Application.SynchronizedCounter.executor": "Run",
++    "Application.UnsafeCounter.executor": "Run",
++    "Application.VolatimeExample.executor": "Run",
++    "JUnit.AnimalDaoJdbcIntegrationTest.delete_shouldDeleteAnimal_andFindById_shouldReturnEmptyOptional.executor": "Run",
++    "JUnit.AnimalDaoJdbcIntegrationTest.findAll_shouldReturnAllAnimals_ifTheyExists.executor": "Run",
++    "JUnit.AnimalDaoJdbcIntegrationTest.save_shouldSaveAnimal_andFindById_shouldReturnIt.executor": "Run",
++    "JUnit.ShelterTest.averageAge_shouldReturnAverageAgeOfAnimals_ifAnimalsExists.executor": "Run",
++    "JUnit.ShelterTest.countByType_shouldReturnAmountOfTypeAnimals_ifAnimalsExists.executor": "Run",
++    "JUnit.ShelterTest.executor": "Run",
++    "JUnit.ShelterTest.findByType_shouldReturnCat_ifAnimalIsCat.executor": "Debug",
++    "JUnit.ShelterTest.findOlderThan_shouldReturnOldest_ifAnimalExists.executor": "Run",
++    "JUnit.ShelterTest.getHeaviest_shouldReturnHeaviestAnimal_ifAnimalExists.executor": "Run",
++    "JUnit.ShelterTest.validate_shouldThrowException_ifWeightIsNotValid.executor": "Run",
++    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
++    "ModuleVcsDetector.initialDetectionPerformed": "true",
++    "RunOnceActivity.MCP Project settings loaded": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
++    "RunOnceActivity.git.unshallow": "true",
++    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "codeWithMe.voiceChat.enabledByDefault": "false",
++    "git-widget-placeholder": "main",
++    "ignore.virus.scanning.warn.message": "true",
++    "kotlin-language-version-configured": "true",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "settings.editor.selected.configurable": "preferences.lookFeel",
++    "vue.rearranger.settings.migration": "true"
++  },
++  "keyToStringList": {
++    "DatabaseDriversLRU": [
++      "postgresql"
++    ]
++  }
++}]]></component>
++  <component name="RunManager">
++    <configuration name="AnimalDaoJdbcIntegrationTest.delete_shouldDeleteAnimal_andFindById_shouldReturnEmptyOptional" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="pet-shelter" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.university.shelter.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
++      <option name="ALTERNATIVE_JRE_PATH" value="temurin-21" />
++      <option name="PACKAGE_NAME" value="com.university.shelter" />
++      <option name="MAIN_CLASS_NAME" value="com.university.shelter.AnimalDaoJdbcIntegrationTest" />
++      <option name="METHOD_NAME" value="delete_shouldDeleteAnimal_andFindById_shouldReturnEmptyOptional" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="AnimalDaoJdbcIntegrationTest.findAll_shouldReturnAllAnimals_ifTheyExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="pet-shelter" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.university.shelter.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="com.university.shelter" />
++      <option name="MAIN_CLASS_NAME" value="com.university.shelter.AnimalDaoJdbcIntegrationTest" />
++      <option name="METHOD_NAME" value="findAll_shouldReturnAllAnimals_ifTheyExists" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="AnimalDaoJdbcIntegrationTest.save_shouldSaveAnimal_andFindById_shouldReturnIt" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="pet-shelter" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.university.shelter.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="com.university.shelter" />
++      <option name="MAIN_CLASS_NAME" value="com.university.shelter.AnimalDaoJdbcIntegrationTest" />
++      <option name="METHOD_NAME" value="save_shouldSaveAnimal_andFindById_shouldReturnIt" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="ShelterTest.averageAge_shouldReturnAverageAgeOfAnimals_ifAnimalsExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="pet-shelter" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.university.shelter.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="com.university.shelter" />
++      <option name="MAIN_CLASS_NAME" value="com.university.shelter.ShelterTest" />
++      <option name="METHOD_NAME" value="averageAge_shouldReturnAverageAgeOfAnimals_ifAnimalsExists" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="ShelterTest.validate_shouldThrowException_ifWeightIsNotValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="pet-shelter" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.university.shelter.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="com.university.shelter" />
++      <option name="MAIN_CLASS_NAME" value="com.university.shelter.ShelterTest" />
++      <option name="METHOD_NAME" value="validate_shouldThrowException_ifWeightIsNotValid(double,java.lang.String)" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <list>
++      <item itemvalue="JUnit.AnimalDaoJdbcIntegrationTest.delete_shouldDeleteAnimal_andFindById_shouldReturnEmptyOptional" />
++      <item itemvalue="JUnit.AnimalDaoJdbcIntegrationTest.findAll_shouldReturnAllAnimals_ifTheyExists" />
++      <item itemvalue="JUnit.AnimalDaoJdbcIntegrationTest.save_shouldSaveAnimal_andFindById_shouldReturnIt" />
++      <item itemvalue="JUnit.ShelterTest.averageAge_shouldReturnAverageAgeOfAnimals_ifAnimalsExists" />
++      <item itemvalue="JUnit.ShelterTest.validate_shouldThrowException_ifWeightIsNotValid" />
++    </list>
++    <recent_temporary>
++      <list>
++        <item itemvalue="JUnit.AnimalDaoJdbcIntegrationTest.delete_shouldDeleteAnimal_andFindById_shouldReturnEmptyOptional" />
++        <item itemvalue="JUnit.AnimalDaoJdbcIntegrationTest.findAll_shouldReturnAllAnimals_ifTheyExists" />
++        <item itemvalue="JUnit.AnimalDaoJdbcIntegrationTest.save_shouldSaveAnimal_andFindById_shouldReturnIt" />
++        <item itemvalue="JUnit.ShelterTest.averageAge_shouldReturnAverageAgeOfAnimals_ifAnimalsExists" />
++        <item itemvalue="JUnit.ShelterTest.validate_shouldThrowException_ifWeightIsNotValid" />
++      </list>
++    </recent_temporary>
++  </component>
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="f913e405-9c74-4f7d-8d8b-0ade6010e995" name="Changes" comment="" />
++      <created>1778584281354</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1778584281354</updated>
++      <workItem from="1778584282370" duration="9081000" />
++      <workItem from="1778674327708" duration="4054000" />
++      <workItem from="1778693347483" duration="1620000" />
++      <workItem from="1778753409690" duration="1798000" />
++      <workItem from="1778775524385" duration="2962000" />
++      <workItem from="1778780643955" duration="210000" />
++      <workItem from="1778864540499" duration="2116000" />
++      <workItem from="1778913814767" duration="8345000" />
++      <workItem from="1778923155405" duration="511000" />
++      <workItem from="1778923836965" duration="388000" />
++      <workItem from="1778935146582" duration="2854000" />
++      <workItem from="1779609516806" duration="64000" />
++      <workItem from="1779610207624" duration="10624000" />
++      <workItem from="1779867397497" duration="9898000" />
++      <workItem from="1779886328281" duration="2122000" />
++      <workItem from="1779965175855" duration="6517000" />
++      <workItem from="1779972040606" duration="53000" />
++      <workItem from="1780173162579" duration="1929000" />
++      <workItem from="1780230744715" duration="4814000" />
++    </task>
++    <task id="LOCAL-00001" summary="Add Animal abstract class and HealthStatus enum">
++      <option name="closed" value="true" />
++      <created>1778600441871</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1778600441871</updated>
++    </task>
++    <task id="LOCAL-00002" summary="Add Shelter class, FoodPortion record, Feedable interface, Beagle class and Persian class">
++      <option name="closed" value="true" />
++      <created>1778605001908</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1778605001908</updated>
++    </task>
++    <task id="LOCAL-00003" summary="Add Main menu">
++      <option name="closed" value="true" />
++      <created>1778678202335</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1778678202335</updated>
++    </task>
++    <task id="LOCAL-00004" summary="Add findByType menu option and fix Scanner nextLine issues">
++      <option name="closed" value="true" />
++      <created>1778693986372</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1778693986372</updated>
++    </task>
++    <task id="LOCAL-00005" summary="Add ShelterTest and findOlderThan() with stream api">
++      <option name="closed" value="true" />
++      <created>1778866651592</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1778866651593</updated>
++    </task>
++    <task id="LOCAL-00006" summary="Add new methods in Shelter and tests in ShelterTest for them, add JUnit 5.10.2 and AssertJ 3.25.3 dependencies in pom.xml">
++      <option name="closed" value="true" />
++      <created>1778922823941</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1778922823941</updated>
++    </task>
++    <task id="LOCAL-00007" summary="Add @DisplayName for tests">
++      <option name="closed" value="true" />
++      <created>1778923646931</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1778923646931</updated>
++    </task>
++    <task id="LOCAL-00008" summary="Add test with CsvSource, correct text errors">
++      <option name="closed" value="true" />
++      <created>1778936339777</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1778936339777</updated>
++    </task>
++    <task id="LOCAL-00009" summary="Add JDBC infrastructure: ConnectionFactory, AnimalDao, InMemoryAnimalDao, AnimalDaoJdbc (save, findById)">
++      <option name="closed" value="true" />
++      <created>1779620936189</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1779620936189</updated>
++    </task>
++    <task id="LOCAL-00010" summary="Add JDBC DAO layer: AnimalDaoJdbc, InMemoryAnimalDao, ShelterService, integration tests, logging">
++      <option name="closed" value="true" />
++      <created>1779876313974</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1779876313975</updated>
++    </task>
++    <task id="LOCAL-00011" summary="data">
++      <option name="closed" value="true" />
++      <created>1779887015464</created>
++      <option name="number" value="00011" />
++      <option name="presentableId" value="LOCAL-00011" />
++      <option name="project" value="LOCAL" />
++      <updated>1779887015465</updated>
++    </task>
++    <task id="LOCAL-00012" summary="add concurrency examples and synchronization demos: BlockingQueueExample, CallableExample, RunnableExample, MapRace, FixedPoolExample, AtomicCounter, LockCounter, RaceConditionStressTest, SynchronizedCounter, UnsafeCounter and VolatileExample">
++      <option name="closed" value="true" />
++      <created>1779971688001</created>
++      <option name="number" value="00012" />
++      <option name="presentableId" value="LOCAL-00012" />
++      <option name="project" value="LOCAL" />
++      <updated>1779971688002</updated>
++    </task>
++    <option name="localTasksCounter" value="13" />
++    <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
++  </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="Add Animal abstract class and HealthStatus enum" />
++    <MESSAGE value="Add Shelter class, FoodPortion record, Feedable interface, Beagle class and Persian class" />
++    <MESSAGE value="Add Main menu" />
++    <MESSAGE value="Add findByType menu option and fix Scanner nextLine issues" />
++    <MESSAGE value="Add ShelterTest and findOlderThan() with stream api" />
++    <MESSAGE value="Add new methods in Shelter and tests in ShelterTest for them, add JUnit 5.10.2 and AssertJ 3.25.3 dependencies in pom.xml" />
++    <MESSAGE value="Add @DisplayName for tests" />
++    <MESSAGE value="Add test with CsvSource, correct spelling errors" />
++    <MESSAGE value="Add test with CsvSource, correct text errors" />
++    <MESSAGE value="Add JDBC infrastructure: ConnectionFactory, AnimalDao, InMemoryAnimalDao, AnimalDaoJdbc (save, findById)" />
++    <MESSAGE value="Add JDBC DAO layer: AnimalDaoJdbc, InMemoryAnimalDao, ShelterService, integration tests, logging" />
++    <MESSAGE value="data" />
++    <MESSAGE value="add BlockingQueueExample, CallableExample, RunnableExample, MapRace, FixedPoolExample, AtomicCounter, LockCounter, RaceConditionStressTest, SynchronizedCounter, UnsafeCounter and VolatileExample" />
++    <MESSAGE value="add concurrency examples and synchronization demos: BlockingQueueExample, CallableExample, RunnableExample, MapRace, FixedPoolExample, AtomicCounter, LockCounter, RaceConditionStressTest, SynchronizedCounter, UnsafeCounter and VolatileExample" />
++    <option name="LAST_COMMIT_MESSAGE" value="add concurrency examples and synchronization demos: BlockingQueueExample, CallableExample, RunnableExample, MapRace, FixedPoolExample, AtomicCounter, LockCounter, RaceConditionStressTest, SynchronizedCounter, UnsafeCounter and VolatileExample" />
++  </component>
++</project>
+\ No newline at end of file
+Index: untitled/.idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/untitled/.idea/encodings.xml b/untitled/.idea/encodings.xml
+new file mode 100644
+--- /dev/null	(date 1778923652630)
++++ b/untitled/.idea/encodings.xml	(date 1778923652630)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/data_source_mapping.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/data_source_mapping.xml b/.idea/data_source_mapping.xml
+new file mode 100644
+--- /dev/null	(date 1779874539116)
++++ b/.idea/data_source_mapping.xml	(date 1779874539116)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="DataSourcePerFileMappings">
++    <file url="file://$PROJECT_DIR$/src/test/java/com/university/shelter/AnimalDaoJdbcIntegrationTest.java" value="7379cbbf-8f87-455a-a615-18808e18e1d3" />
++  </component>
++</project>
+\ No newline at end of file
+Index: untitled/.idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/untitled/.idea/vcs.xml b/untitled/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1778923652713)
++++ b/untitled/.idea/vcs.xml	(date 1778923652713)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: untitled/src/main/java/org/example/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/untitled/src/main/java/org/example/Main.java b/untitled/src/main/java/org/example/Main.java
+new file mode 100644
+--- /dev/null	(date 1778923652678)
++++ b/untitled/src/main/java/org/example/Main.java	(date 1778923652678)
+@@ -0,0 +1,17 @@
++package org.example;
++
++//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
++// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
++public class Main {
++    public static void main(String[] args) {
++        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
++        // to see how IntelliJ IDEA suggests fixing it.
++        System.out.printf("Hello and welcome!");
++
++        for (int i = 1; i <= 5; i++) {
++            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
++            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
++            System.out.println("i = " + i);
++        }
++    }
++}
+\ No newline at end of file
+Index: untitled/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/untitled/pom.xml b/untitled/pom.xml
+new file mode 100644
+--- /dev/null	(date 1778923652741)
++++ b/untitled/pom.xml	(date 1778923652741)
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project xmlns="http://maven.apache.org/POM/4.0.0"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++    <modelVersion>4.0.0</modelVersion>
++
++    <groupId>org.example</groupId>
++    <artifactId>untitled</artifactId>
++    <version>1.0-SNAPSHOT</version>
++
++    <properties>
++        <maven.compiler.source>21</maven.compiler.source>
++        <maven.compiler.target>21</maven.compiler.target>
++        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++    </properties>
++
++</project>
+\ No newline at end of file
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>target/\r\n!.mvn/wrapper/maven-wrapper.jar\r\n!**/src/main/**/target/\r\n!**/src/test/**/target/\r\n.kotlin\r\n\r\n### IntelliJ IDEA ###\r\n.idea/modules.xml\r\n.idea/jarRepositories.xml\r\n.idea/compiler.xml\r\n.idea/libraries/\r\n*.iws\r\n*.iml\r\n*.ipr\r\n\r\n### Eclipse ###\r\n.apt_generated\r\n.classpath\r\n.factorypath\r\n.project\r\n.settings\r\n.springBeans\r\n.sts4-cache\r\n\r\n### NetBeans ###\r\n/nbproject/private/\r\n/nbbuild/\r\n/dist/\r\n/nbdist/\r\n/.nb-gradle/\r\nbuild/\r\n!**/src/main/**/build/\r\n!**/src/test/**/build/\r\n\r\n### VS Code ###\r\n.vscode/\r\n\r\n### Mac OS ###\r\n.DS_Store
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+--- a/.gitignore	(revision f82b6c0609df97ec3ee1c2310e3d1521cff80054)
++++ b/.gitignore	(date 1779611258854)
+@@ -3,6 +3,7 @@
+ !**/src/main/**/target/
+ !**/src/test/**/target/
+ .kotlin
++application.properties
+ 
+ ### IntelliJ IDEA ###
+ .idea/modules.xml
+Index: untitled/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/untitled/.gitignore b/untitled/.gitignore
+new file mode 100644
+--- /dev/null	(date 1778923652797)
++++ b/untitled/.gitignore	(date 1778923652797)
+@@ -0,0 +1,39 @@
++target/
++!.mvn/wrapper/maven-wrapper.jar
++!**/src/main/**/target/
++!**/src/test/**/target/
++.kotlin
++
++### IntelliJ IDEA ###
++.idea/modules.xml
++.idea/jarRepositories.xml
++.idea/compiler.xml
++.idea/libraries/
++*.iws
++*.iml
++*.ipr
++
++### Eclipse ###
++.apt_generated
++.classpath
++.factorypath
++.project
++.settings
++.springBeans
++.sts4-cache
++
++### NetBeans ###
++/nbproject/private/
++/nbbuild/
++/dist/
++/nbdist/
++/.nb-gradle/
++build/
++!**/src/main/**/build/
++!**/src/test/**/build/
++
++### VS Code ###
++.vscode/
++
++### Mac OS ###
++.DS_Store
+\ No newline at end of file
+Index: pet-shelter/src/main/java/org/example/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pet-shelter/src/main/java/org/example/Main.java b/pet-shelter/src/main/java/org/example/Main.java
+new file mode 100644
+--- /dev/null	(date 1778923652763)
++++ b/pet-shelter/src/main/java/org/example/Main.java	(date 1778923652763)
+@@ -0,0 +1,17 @@
++package org.example;
++
++//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
++// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
++public class Main {
++    public static void main(String[] args) {
++        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
++        // to see how IntelliJ IDEA suggests fixing it.
++        System.out.printf("Hello and welcome!");
++
++        for (int i = 1; i <= 5; i++) {
++            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
++            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
++            System.out.println("i = " + i);
++        }
++    }
++}
+\ No newline at end of file
+Index: pet-shelter/.idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pet-shelter/.idea/.gitignore b/pet-shelter/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1778923652809)
++++ b/pet-shelter/.idea/.gitignore	(date 1778923652809)
+@@ -0,0 +1,10 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Ignored default folder with query files
++/queries/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
