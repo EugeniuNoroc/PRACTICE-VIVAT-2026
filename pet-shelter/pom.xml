@@ -11,6 +11,21 @@
 
   <build>
     <plugins>
+      <!-- ====================================================================
+           REVIEW[DEBT] (W1, день 3): `mvn test` сейчас КРАСНЫЙ.
+           Причина: интеграционные тесты (@Tag("integration"), требуют живой БД)
+           гоняются вместе с unit-тестами в фазе test и падают, если БД не поднята.
+           Фикс — исключить группу integration по умолчанию:
+
+             <configuration>
+               <excludedGroups>integration</excludedGroups>
+             </configuration>
+
+           Тогда `mvn test` = только unit (быстро, без БД).
+           Запуск интеграционных вручную: mvn test -DexcludedGroups=
+           Каноничнее (на будущее) — вынести IT в maven-failsafe-plugin,
+           он работает в отдельной фазе integration-test (`mvn verify`).
+           ==================================================================== -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>

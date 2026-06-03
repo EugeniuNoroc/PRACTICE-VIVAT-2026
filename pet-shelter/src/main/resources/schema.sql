@@ -20,3 +20,10 @@ CREATE TABLE cats (
                       breed VARCHAR(100) NOT NULL,
                       indoor_only BOOLEAN NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS shelter_capacity (
+                                                id SERIAL PRIMARY KEY,
+                                                available_spots INT NOT NULL CHECK (available_spots >= 0)
+);
+
+INSERT INTO shelter_capacity (available_spots) VALUES (10);
