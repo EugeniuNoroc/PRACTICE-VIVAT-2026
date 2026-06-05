@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+desktop.ini
+*.meta
+.ai/
+mcp.json
+Practic.iml
