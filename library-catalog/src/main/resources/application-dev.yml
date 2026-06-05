@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/library_db
+    username: library_user
+    password: library_pass
+
+logging:
+  level:
+    com.university.library: DEBUG
