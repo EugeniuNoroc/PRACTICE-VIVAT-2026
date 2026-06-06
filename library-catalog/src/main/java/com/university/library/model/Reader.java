@@ -1,21 +1,22 @@
 package com.university.library.model;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Reader {
-    private Long id;
+    private UUID id;
     private String fullName;
     private String email;
     private LocalDate registrationDate;
 
-    public Reader(Long id, String fullName, String email, LocalDate registrationDate) {
+    public Reader(UUID id, String fullName, String email, LocalDate registrationDate) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.registrationDate = registrationDate;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 

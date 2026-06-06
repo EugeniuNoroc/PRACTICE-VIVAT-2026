@@ -1,16 +1,17 @@
 package com.university.library.model;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Loan {
-    private Long id;
-    private Long bookId;
-    private Long readerId;
+    private UUID id;
+    private UUID bookId;
+    private UUID readerId;
     private LocalDate loanDate;
     private LocalDate returnDate;
     private boolean returned;
 
-    public Loan(Long id, Long bookId, Long readerId, LocalDate loanDate, LocalDate returnDate, boolean returned) {
+    public Loan(UUID id, UUID bookId, UUID readerId, LocalDate loanDate, LocalDate returnDate, boolean returned) {
         this.id = id;
         this.bookId = bookId;
         this.readerId = readerId;
@@ -19,15 +20,15 @@ public class Loan {
         this.returned = returned;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public Long getBookId() {
+    public UUID getBookId() {
         return bookId;
     }
 
-    public Long getReaderId() {
+    public UUID getReaderId() {
         return readerId;
     }
 

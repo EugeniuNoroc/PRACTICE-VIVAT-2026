@@ -1,15 +1,17 @@
 package com.university.library.model;
 
+import java.util.UUID;
+
 public class Book {
-    private Long id;
+    private UUID id;
     private String title;
     private String isbn;
     private int year;
-    private Long authorId;
+    private UUID authorId;
     private int copiesTotal;
     private int copiesAvailable;
 
-    public Book(Long id, String title, String isbn, int year, Long authorId, int copiesTotal, int copiesAvailable) {
+    public Book(UUID id, String title, String isbn, int year, UUID authorId, int copiesTotal, int copiesAvailable) {
         this.id = id;
         this.title = title;
         this.isbn = isbn;
@@ -19,7 +21,7 @@ public class Book {
         this.copiesAvailable = copiesAvailable;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -35,7 +37,7 @@ public class Book {
         return year;
     }
 
-    public Long getAuthorId() {
+    public UUID getAuthorId() {
         return authorId;
     }
 

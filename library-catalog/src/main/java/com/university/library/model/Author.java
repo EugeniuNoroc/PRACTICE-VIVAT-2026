@@ -1,19 +1,21 @@
 package com.university.library.model;
 
+import java.util.UUID;
+
 public class Author {
-    private Long id;
+    private UUID id;
     private String fullName;
     private int birthYear;
     private String biography;
 
-    public Author(Long id, String fullName, int birthYear, String biography) {
+    public Author(UUID id, String fullName, int birthYear, String biography) {
         this.id = id;
         this.fullName = fullName;
         this.birthYear = birthYear;
         this.biography = biography;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
