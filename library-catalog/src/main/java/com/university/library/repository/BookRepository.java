@@ -27,6 +27,18 @@ public class BookRepository {
         return jdbcTemplate.query("SELECT * FROM books", BOOK_ROW_MAPPER);
     }
 
+    public List<Book> findAll(int offset, int limit) {
+        return jdbcTemplate.query(
+                "SELECT * FROM books LIMIT ? OFFSET ?",
+                BOOK_ROW_MAPPER, limit, offset
+        );
+    }
+
+    public long count() {
+        Long result = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM books", Long.class);
+        return result != null ? result : 0L;
+    }
+
     public Optional<Book> findById(UUID id) {
         // return jdbcTemplate.query("SELECT * FROM books WHERE id = ?", BOOK_ROW_MAPPER, id).stream().findFirst();
         return namedParameterJdbcTemplate.query(

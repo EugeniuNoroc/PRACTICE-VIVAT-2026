@@ -13,9 +13,7 @@ import java.util.UUID;
 public class AuthorRepository {
     private final JdbcTemplate jdbcTemplate;
 
-    private static final RowMapper<Author> AUTHOR_ROW_MAPPER = (rs, rowNum) -> {
-        return new Author(rs.getObject("id", UUID.class), rs.getString("full_name"), rs.getInt("birth_year"), rs.getString("biography"));
-    };
+    private static final RowMapper<Author> AUTHOR_ROW_MAPPER = (rs, rowNum) -> new Author(rs.getObject("id", UUID.class), rs.getString("full_name"), rs.getInt("birth_year"), rs.getString("biography"));
 
     public AuthorRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
