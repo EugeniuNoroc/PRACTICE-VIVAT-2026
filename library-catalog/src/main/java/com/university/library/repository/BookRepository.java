@@ -14,9 +14,7 @@ public class BookRepository {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static final RowMapper<Book> BOOK_ROW_MAPPER = (rs, rowNum) -> {
-        return new Book(rs.getObject("id", UUID.class), rs.getString("title"), rs.getString("isbn"), rs.getInt("year"), rs.getObject("author_id", UUID.class), rs.getInt("copies_total"), rs.getInt("copies_available"));
-    };
+    private static final RowMapper<Book> BOOK_ROW_MAPPER = (rs, rowNum) -> new Book(rs.getObject("id", UUID.class), rs.getString("title"), rs.getString("isbn"), rs.getInt("year"), rs.getObject("author_id", UUID.class), rs.getInt("copies_total"), rs.getInt("copies_available"));
 
     public BookRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -25,6 +23,18 @@ public class BookRepository {
 
     public List<Book> findAll() {
         return jdbcTemplate.query("SELECT * FROM books", BOOK_ROW_MAPPER);
+    }
+
+    public List<Book> findAll(int offset, int limit) {
+        return jdbcTemplate.query(
+                "SELECT * FROM books LIMIT ? OFFSET ?",
+                BOOK_ROW_MAPPER, limit, offset
+        );
+    }
+
+    public long count() {
+        Long result = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM books", Long.class);
+        return result != null ? result : 0L;
     }
 
     public Optional<Book> findById(UUID id) {

@@ -48,4 +48,8 @@ public class Book {
     public int getCopiesAvailable() {
         return copiesAvailable;
     }
+
+    public void setCopiesAvailable(int copiesAvailable) {
+        this.copiesAvailable = copiesAvailable;
+    }
 }

@@ -1,0 +1,40 @@
+### Создать автора
+POST http://localhost:8080/api/authors
+Content-Type: application/json
+
+{
+  "fullName": "Лев Толстой",
+  "birthYear": 1828,
+  "biography": "Русский писатель"
+}
+
+### Получить всех авторов
+GET http://localhost:8080/api/authors
+
+### Создать книгу
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "title": "Война и мир",
+  "isbn": "978-5-04-116820-7",
+  "year": 1869,
+  "authorId": "9ad7af06-1e9b-4bc8-9c27-b428cef89692",
+  "copiesTotal": 5
+}
+
+### Получить все книги
+GET http://localhost:8080/api/books?page=0&size=10
+
+### Создать читателя
+POST http://localhost:8080/api/readers
+Content-Type: application/json
+
+{
+  "fullName": "Иван Иванов",
+  "email": "ivan2@example.com",
+  "registrationDate": "2026-01-01"
+}
+
+### Выдать книгу
+POST http://localhost:8080/api/loans?bookId=1be5849b-05ec-403f-a8e6-20273a64a9ca&readerId=d936c173-b4ff-4e06-bd9b-6d3d3f7cda25
