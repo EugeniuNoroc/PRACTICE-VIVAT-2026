@@ -1,9 +1,8 @@
 package com.university.library.controller;
 
 import com.university.library.controller.dto.ApiError;
-import com.university.library.exception.BookNotFoundException;
+import com.university.library.exception.EntityNotFoundException;
 import com.university.library.exception.NoCopiesAvailableException;
-import com.university.library.exception.ReaderNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(error);
     }
 
-    @ExceptionHandler({BookNotFoundException.class, ReaderNotFoundException.class})
+    @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ApiError> handleNotFound(Exception ex, HttpServletRequest request) {
 
         ApiError error = new ApiError(
