@@ -1,4 +1,12 @@
 package com.university.library.controller.dto;
 
-public record AuthorUpdateRequest(String fullName, int birthYear,String biography) {
-}
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record AuthorUpdateRequest(
+        @Schema(description = "Имя автора", example = "Лев Толстой") String fullName,
+        @Schema(description = "Год рождения", example = "2005") int birthYear,
+        @Schema(description = "Биография автора", example = "С 12 лет написал множество произведений, что повлияло на целое литературное направление в жанре...") String biography
+) {}

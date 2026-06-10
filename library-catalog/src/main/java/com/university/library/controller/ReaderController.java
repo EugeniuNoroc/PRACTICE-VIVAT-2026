@@ -4,6 +4,9 @@ import com.university.library.controller.dto.ReaderCreateRequest;
 import com.university.library.controller.dto.ReaderResponse;
 import com.university.library.controller.dto.ReaderUpdateRequest;
 import com.university.library.service.ReaderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +26,10 @@ public class ReaderController {
         this.readerMapper = readerMapper;
     }
 
+    @Operation(summary = "Найти всех читателей")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Читатели найдены, данные возвращены")
+    })
     @GetMapping
     public ResponseEntity<List<ReaderResponse>> findAll() {
         return ResponseEntity.ok(
@@ -32,6 +39,11 @@ public class ReaderController {
         );
     }
 
+    @Operation(summary = "Найти читателя по ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Читатель найден, данные возвращены"),
+            @ApiResponse(responseCode = "404", description = "Автор не найден")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<ReaderResponse> findById(@PathVariable UUID id) {
         return readerService.findById(id)
@@ -39,12 +51,24 @@ public class ReaderController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Создать читателя")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Читатель создан"),
+            @ApiResponse(responseCode = "400", description = "Невалидные данные"),
+            @ApiResponse(responseCode = "409", description = "Читатель с таким email уже существует")
+    })
     @PostMapping
     public ResponseEntity<Void> save(@Valid @RequestBody ReaderCreateRequest request) {
         readerService.save(readerMapper.toEntity(request));
         return ResponseEntity.status(201).build();
     }
 
+    @Operation(summary = "Обновить данные читателя")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Читатель обновлен"),
+            @ApiResponse(responseCode = "400", description = "Невалидные данные"),
+            @ApiResponse(responseCode = "404", description = "Читатель не найден")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable UUID id, @Valid @RequestBody ReaderUpdateRequest request) {
         if (readerService.findById(id).isPresent()) {
@@ -54,6 +78,11 @@ public class ReaderController {
         return ResponseEntity.notFound().build();
     }
 
+    @Operation(summary = "Удалить читателя")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Читатель удален"),
+            @ApiResponse(responseCode = "404", description = "Читатель не найден")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         if (readerService.findById(id).isPresent()) {

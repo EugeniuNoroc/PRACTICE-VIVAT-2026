@@ -2,6 +2,9 @@ package com.university.library.controller;
 
 import com.university.library.exception.NoCopiesAvailableException;
 import com.university.library.service.LoanService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +20,11 @@ public class LoanController {
         this.loanService = loanService;
     }
 
-    @PostMapping
+    @Operation(summary = "Выдать книгу читателю")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Книга успешно выдана"),
+            @ApiResponse(responseCode = "409", description = "Нет доступных экземпляров книги")
+    })
     public ResponseEntity<Void> issueLoan(@RequestParam UUID bookId, @RequestParam UUID readerId) {
         try {
             loanService.issueLoan(bookId, readerId);
