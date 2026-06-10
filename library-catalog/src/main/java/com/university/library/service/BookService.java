@@ -1,5 +1,6 @@
 package com.university.library.service;
 
+import com.university.library.controller.dto.BookResponse;
 import com.university.library.controller.dto.BookUpdateRequest;
 import com.university.library.controller.dto.PagedResponse;
 import com.university.library.exception.BookNotFoundException;
@@ -24,9 +25,9 @@ public class BookService {
         return bookRepository.findAll();
     }
     
-    public PagedResponse<Book> findAll(int page, int size) {
+    public PagedResponse<BookResponse> findAll(int page, int size) {
         int offset = page * size;
-        List<Book> books = bookRepository.findAll(offset, size);
+        List<BookResponse> books = bookRepository.findAllBooksWithAuthor(offset, size);
         long total = bookRepository.count();
         return new PagedResponse<>(books, page, size, total);
     }
@@ -36,6 +37,10 @@ public class BookService {
     }
 
     public Optional<Book> findById(UUID id) { return bookRepository.findById(id); }
+
+    public Optional<BookResponse> findByIdWithAuthor(UUID id) {
+        return bookRepository.findByIdWithAuthor(id);
+    }
 
     public void update(UUID id, BookUpdateRequest request) {
         Book existingBook = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));

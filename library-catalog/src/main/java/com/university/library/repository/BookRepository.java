@@ -1,5 +1,6 @@
 package com.university.library.repository;
 
+import com.university.library.controller.dto.BookResponse;
 import com.university.library.model.Book;
 import com.university.library.model.BookWithAuthor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -44,6 +45,22 @@ public class BookRepository {
                 Map.of("id", id), BOOK_ROW_MAPPER).stream().findFirst();
     }
 
+    public Optional<BookResponse> findByIdWithAuthor(UUID id) {
+        return jdbcTemplate.query(
+                "SELECT b.id, b.title, b.isbn, b.year, b.copies_available, a.full_name as author_name " +
+                        "FROM books b JOIN authors a ON b.author_id = a.id WHERE b.id = ?",
+                (rs, rowNum) -> new BookResponse(
+                        rs.getObject("id", UUID.class),
+                        rs.getString("title"),
+                        rs.getString("isbn"),
+                        rs.getInt("year"),
+                        rs.getString("author_name"),
+                        rs.getInt("copies_available")
+                ),
+                id
+        ).stream().findFirst();
+    }
+
     public void save(Book book) {
         /*
         jdbcTemplate.update(
@@ -68,15 +85,20 @@ public class BookRepository {
         jdbcTemplate.update("DELETE FROM books WHERE id = ?", id);
     }
 
-    public List<BookWithAuthor> findAllBooksWithAuthor() {
+    public List<BookResponse> findAllBooksWithAuthor(int offset, int limit) {
         return jdbcTemplate.query(
-                "SELECT b.id, b.title, a.full_name, as author_name " + "FROM books b JOIN authors a ON b.author_id = a.id",
-                (rs, rowNum) -> new BookWithAuthor(
+                "SELECT b.id, b.title, b.isbn, b.year, b.copies_available, a.full_name as author_name " +
+                        "FROM books b JOIN authors a ON b.author_id = a.id " +
+                        "LIMIT ? OFFSET ?",
+                (rs, rowNum) -> new BookResponse(
                         rs.getObject("id", UUID.class),
                         rs.getString("title"),
                         rs.getString("isbn"),
-                        rs.getString("author_name")
-                )
+                        rs.getInt("year"),
+                        rs.getString("author_name"),
+                        rs.getInt("copies_available")
+                ),
+                limit, offset
         );
     }
 
