@@ -21,7 +21,7 @@ public class ReaderController {
     private final ReaderService readerService;
     private final ReaderMapper readerMapper;
 
-    public ReaderController(ReaderService readerService, ReaderMapper readerMapper, AuthorMapper authorMapper) {
+    public ReaderController(ReaderService readerService, ReaderMapper readerMapper) {
         this.readerService = readerService;
         this.readerMapper = readerMapper;
     }
