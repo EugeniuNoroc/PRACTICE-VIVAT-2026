@@ -44,6 +44,9 @@ public class BookController {
     })
     @GetMapping("/{id}")
     public ResponseEntity<BookResponse> findById(@PathVariable UUID id) {
+        // TODO (W2 review): 404 здесь с ПУСТЫМ телом (notFound().build()), без ApiError — непоследовательно
+        //  с остальными ошибками. Тест findById_shouldReturn404WithApiError мокает throw, но этот реальный путь
+        //  исключение не бросает. Вариант: бросать BookNotFoundException и форматировать в advice.
         return bookService.findByIdWithAuthor(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

@@ -61,6 +61,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
+    // TODO (W2 review): не хватает обработчика нарушения уникального ключа. Сейчас дубль ISBN (UNIQUE на books.isbn)
+    //  -> DataIntegrityViolationException -> падает в handleAny -> 500, хотя Swagger на POST /api/books обещает
+    //  409 "ISBN уже существует" (и это незакрытый критерий дня 2 — DuplicateKeyException).
+    //  Добавь @ExceptionHandler(DataIntegrityViolationException.class) -> 409 CONFLICT.
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleAny(Exception ex, HttpServletRequest request) {
 

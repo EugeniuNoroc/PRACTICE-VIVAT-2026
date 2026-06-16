@@ -1,3 +1,6 @@
+# TODO (W2 review): пример "Создать книгу" ниже невалиден — пустой title И невалидный ISBN (978-...-7),
+#  POST вернёт 400. Поставь валидные данные. Не хватает примеров PUT/DELETE и loan return/list.
+#  По заданию (день 3) файл должен лежать в src/test/resources, а не в src/main/resources.
 ### Создать автора
 POST http://localhost:8080/api/authors
 Content-Type: application/json

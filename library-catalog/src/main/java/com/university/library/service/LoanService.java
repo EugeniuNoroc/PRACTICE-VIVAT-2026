@@ -33,6 +33,10 @@ public class LoanService {
         readerRepository.findById(readerId)
                 .orElseThrow(() -> new ReaderNotFoundException(readerId));
 
+        // TODO (W2 review): check-then-act гонка — два параллельных запроса могут оба пройти copies>0 и увести
+        //  copies_available в минус. Лечится в W3: @Transactional + блокировка (та же гонка, что ловили в W1).
+        // TODO (W2 review): UUID.randomUUID() ниже выбрасывается впустую — LoanRepository.save не пишет id,
+        //  БД генерит свой через gen_random_uuid(). Либо вставляй этот id, либо не создавай его в Java.
         if (book.getCopiesAvailable() > 0) {
             LocalDate today =  LocalDate.now();
             Loan loan = new Loan(UUID.randomUUID(), bookId, readerId, LocalDate.now(), today.plusDays(14), false);

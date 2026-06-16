@@ -39,6 +39,7 @@ public class BookRepository {
     }
 
     public Optional<Book> findById(UUID id) {
+        // TODO (W2 review): убери закомментированный мёртвый код (здесь и в save ниже) — в коммит он попадать не должен.
         // return jdbcTemplate.query("SELECT * FROM books WHERE id = ?", BOOK_ROW_MAPPER, id).stream().findFirst();
         return namedParameterJdbcTemplate.query(
                 "SELECT * FROM books WHERE id = :id",
@@ -85,6 +86,10 @@ public class BookRepository {
         jdbcTemplate.update("DELETE FROM books WHERE id = ?", id);
     }
 
+    // TODO (W2 review): пагинация без ORDER BY — Postgres не гарантирует порядок строк, страницы могут "плыть"
+    //  между запросами. Добавь ORDER BY (например b.title или b.id) перед LIMIT/OFFSET.
+    // TODO (W2 review): рассинхрон с count() — здесь INNER JOIN (книга без автора выпадает), а count() считает
+    //  ВСЕ книги -> totalElements может быть больше реально отдаваемых строк.
     public List<BookResponse> findAllBooksWithAuthor(int offset, int limit) {
         return jdbcTemplate.query(
                 "SELECT b.id, b.title, b.isbn, b.year, b.copies_available, a.full_name as author_name " +
