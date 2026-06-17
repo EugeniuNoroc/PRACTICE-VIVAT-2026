@@ -10,13 +10,14 @@ import com.university.tracker.repository.ProjectRepository;
 import com.university.tracker.repository.TagRepository;
 import com.university.tracker.repository.TaskRepository;
 import com.university.tracker.repository.UserRepository;
-import org.jspecify.annotations.NonNull;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
+@Profile("!test")
 public class DataInitializer implements CommandLineRunner {
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
