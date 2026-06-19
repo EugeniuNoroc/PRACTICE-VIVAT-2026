@@ -38,11 +38,16 @@ public class Task {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "assignee_id")
-    private UUID assigneeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assignee_id")
+    private User assignee;
 
-    @Column(name = "project_id")
-    private UUID projectId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
+
+    @OneToOne(mappedBy ="task", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private TaskDescriptionDetails details;
 
     public UUID getId() {
         return id;
@@ -76,12 +81,8 @@ public class Task {
         return updatedAt;
     }
 
-    public UUID getAssigneeId() {
-        return assigneeId;
-    }
-
-    public UUID getProjectId() {
-        return projectId;
+    public Project getProject() {
+        return project;
     }
 
     public void setTitle(String title) {
@@ -112,11 +113,20 @@ public class Task {
         this.updatedAt = updatedAt;
     }
 
-    public void setAssigneeId(UUID assigneeId) {
-        this.assigneeId = assigneeId;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
-    public void setProjectId(UUID projectId) {
-        this.projectId = projectId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task task)) return false;
+        return id != null && id.equals(task.id);
+    }
+
+    @Override
+    public int hashCode() {
+        // Не Object.hash(id) потому что id у новой энтити равен null до вызова em.persist() из-за чего объект физически есть в Set, но найти невозмжно после генерации нового UUID при em.persist()
+        return getClass().hashCode();
     }
 }

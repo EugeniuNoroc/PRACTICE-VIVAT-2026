@@ -26,7 +26,7 @@ public class LoanController {
             @ApiResponse(responseCode = "409", description = "Нет доступных экземпляров книги")
     })
     @PostMapping
-    public ResponseEntity<Void> issueLoan(@RequestParam UUID bookId, @RequestParam UUID readerId) {
+    public ResponseEntity<Void> issueLoan(@RequestBody UUID bookId, @RequestBody UUID readerId) {
         try {
             loanService.issueLoan(bookId, readerId);
             return ResponseEntity.status(201).build();

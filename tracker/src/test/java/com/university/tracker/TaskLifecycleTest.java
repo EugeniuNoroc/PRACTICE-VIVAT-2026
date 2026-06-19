@@ -1,5 +1,6 @@
 package com.university.tracker;
 
+import com.university.tracker.model.Project;
 import com.university.tracker.model.Task;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.FlushModeType;
@@ -21,8 +22,14 @@ public class TaskLifecycleTest {
     @Test
     public void lifecycleTest(){
         // TRANSIENT
+        Project project = new Project();
+        project.setName("project1");
+        em.persist(project);
+
         Task task = new Task();
         task.setTitle("Task 1");
+        task.setProject(project);
+
         assertThat(em.contains(task)).isFalse();
 
         // TRANSIENT -> PERSISTENT
@@ -45,8 +52,13 @@ public class TaskLifecycleTest {
 
     @Test
     public void dirtyCheckingTest(){
+        Project project = new Project();
+        project.setName("Project 1");
+        em.persist(project);
+
         Task task = new Task();
         task.setTitle("Task 1");
+        task.setProject(project);
         em.persist(task);
         em.flush();
 
@@ -57,8 +69,13 @@ public class TaskLifecycleTest {
 
     @Test
     void firstLevelCacheTest(){
-        Task task= new Task();
+        Project project = new Project();
+        project.setName("Project 1");
+        em.persist(project);
+
+        Task task = new Task();
         task.setTitle("Task 1");
+        task.setProject(project);
         em.persist(task);
         em.flush();
         em.clear();
@@ -69,8 +86,13 @@ public class TaskLifecycleTest {
 
     @Test
     void flushModeAutoTest(){
+        Project project = new Project();
+        project.setName("Project 1");
+        em.persist(project);
+
         Task task = new Task();
         task.setTitle("Task 1");
+        task.setProject(project);
         em.persist(task);
 
         Long count = em.createQuery("SELECT COUNT(t) FROM Task t", Long.class)
@@ -80,13 +102,40 @@ public class TaskLifecycleTest {
 
     @Test
     void flushModeCommitTes(){
+        Project project = new Project();
+        project.setName("Project 1");
+        em.persist(project);
+
         Task task = new Task();
         task.setTitle("Task 1");
+        task.setProject(project);
         em.setFlushMode(FlushModeType.COMMIT);
         em.persist(task);
 
         Long count = em.createQuery("SELECT COUNT(t) FROM Task t", Long.class)
                 .getSingleResult();
         assertThat(count).isEqualTo(0);
+    }
+
+    @Test
+    void orphanRemovalTest(){
+        Project project = new Project();
+        project.setName("Project 1");
+        em.persist(project);
+
+        Task task = new Task();
+        task.setTitle("Task 1");
+        task.setProject(project);
+        project.addTask(task);
+
+        em.persist(project);
+        em.flush();
+        em.clear();
+
+        Project foundProject = em.find(Project.class, project.getId());
+        Task foundTask = em.find(Task.class, task.getId());
+        foundProject.getTasks().remove(foundTask);
+
+        em.flush();
     }
 }

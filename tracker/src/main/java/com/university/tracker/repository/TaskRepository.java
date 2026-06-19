@@ -1,6 +1,7 @@
 package com.university.tracker.repository;
 
 import com.university.tracker.model.Task;
+import com.university.tracker.model.User;
 import com.university.tracker.model.enums.Priority;
 import com.university.tracker.model.enums.TaskStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,7 +14,7 @@ import java.util.UUID;
 
 public interface TaskRepository extends JpaRepository<Task, UUID> {
     List<Task> findByStatus(TaskStatus status);
-    List<Task> findByAssigneeId(UUID assigneeId);
+    List<Task> findByAssignee(User assignee);
     List<Task> findByProjectIdAndStatus(UUID projectId, TaskStatus status);
     List<Task> findByDueDateBefore(LocalDateTime dueDate);
     long countByStatus(TaskStatus status);

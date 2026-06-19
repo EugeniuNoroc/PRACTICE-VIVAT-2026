@@ -36,4 +36,17 @@ public class Tag {
     public void setColor(String color) {
         this.color = color;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tag tag)) return false;
+        return id != null && id.equals(tag.id);
+    }
+
+    @Override
+    public int hashCode() {
+        // Не Object.hash(id) потому что id у новой энтити равен null до вызова em.persist() из-за чего объект физически есть в Set, но найти невозмжно после генерации нового UUID при em.persist()
+        return getClass().hashCode();
+    }
 }

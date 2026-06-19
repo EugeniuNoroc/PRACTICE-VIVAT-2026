@@ -89,7 +89,7 @@ public class DataInitializer implements CommandLineRunner {
         task1.setStatus(TaskStatus.TODO);
         task1.setCreatedAt(LocalDateTime.now());
         task1.setPriority(Priority.HIGH);
-        task1.setProjectId(project1.getId());
+        task1.setProject(project1);
         taskRepository.save(task1);
 
         Task task2 = new Task();
@@ -97,7 +97,7 @@ public class DataInitializer implements CommandLineRunner {
         task2.setStatus(TaskStatus.DONE);
         task2.setCreatedAt(LocalDateTime.now());
         task2.setPriority(Priority.CRITICAL);
-        task2.setProjectId(project1.getId());
+        task2.setProject(project2);
         taskRepository.save(task2);
 
         Task task3 = new Task();
@@ -105,7 +105,7 @@ public class DataInitializer implements CommandLineRunner {
         task3.setStatus(TaskStatus.IN_PROGRESS);
         task3.setCreatedAt(LocalDateTime.now());
         task3.setPriority(Priority.HIGH);
-        task3.setProjectId(project2.getId());
+        task3.setProject(project1);
         taskRepository.save(task3);
 
         Task task4 = new Task();
@@ -113,7 +113,7 @@ public class DataInitializer implements CommandLineRunner {
         task4.setStatus(TaskStatus.TODO);
         task4.setCreatedAt(LocalDateTime.now());
         task4.setPriority(Priority.MEDIUM);
-        task4.setProjectId(project1.getId());
+        task4.setProject(project2);
         taskRepository.save(task4);
 
         Task task5 = new Task();
@@ -121,7 +121,7 @@ public class DataInitializer implements CommandLineRunner {
         task5.setStatus(TaskStatus.IN_PROGRESS);
         task5.setCreatedAt(LocalDateTime.now());
         task5.setPriority(Priority.CRITICAL);
-        task5.setProjectId(project2.getId());
+        task5.setProject(project1);
         taskRepository.save(task5);
 
         Task task6 = new Task();
@@ -129,7 +129,7 @@ public class DataInitializer implements CommandLineRunner {
         task6.setStatus(TaskStatus.TODO);
         task6.setCreatedAt(LocalDateTime.now());
         task6.setPriority(Priority.LOW);
-        task6.setProjectId(project2.getId());
+        task6.setProject(project2);
         taskRepository.save(task6);
 
         Task task7 = new Task();
@@ -137,7 +137,7 @@ public class DataInitializer implements CommandLineRunner {
         task7.setStatus(TaskStatus.CANCELLED);
         task7.setCreatedAt(LocalDateTime.now());
         task7.setPriority(Priority.HIGH);
-        task7.setProjectId(project1.getId());
+        task7.setProject(project1);
         taskRepository.save(task7);
 
         Task task8 = new Task();
@@ -145,7 +145,7 @@ public class DataInitializer implements CommandLineRunner {
         task8.setStatus(TaskStatus.DONE);
         task8.setCreatedAt(LocalDateTime.now());
         task8.setPriority(Priority.MEDIUM);
-        task8.setProjectId(project2.getId());
+        task8.setProject(project2);
         taskRepository.save(task8);
 
         Task task9 = new Task();
@@ -153,7 +153,7 @@ public class DataInitializer implements CommandLineRunner {
         task9.setStatus(TaskStatus.TODO);
         task9.setCreatedAt(LocalDateTime.now());
         task9.setPriority(Priority.LOW);
-        task9.setProjectId(project1.getId());
+        task9.setProject(project1);
         taskRepository.save(task9);
 
         Task task10 = new Task();
@@ -161,7 +161,7 @@ public class DataInitializer implements CommandLineRunner {
         task10.setStatus(TaskStatus.IN_PROGRESS);
         task10.setCreatedAt(LocalDateTime.now());
         task10.setPriority(Priority.MEDIUM);
-        task10.setProjectId(project2.getId());
+        task10.setProject(project2);
         taskRepository.save(task10);
     }
 }

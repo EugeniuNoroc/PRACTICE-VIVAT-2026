@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public record BookCreateRequest(
         @NotBlank @Schema(description = "Название книги", example = "Война и мир") String title,
-        @ValidIsbn @Schema(description = "ISBN книги", example = "978-5-04-116820-7") String isbn,
+        @ValidIsbn @Max(1000) @Schema(description = "ISBN книги", example = "978-5-04-116820-7") String isbn,
         @Min(1500) @Max(2100) @Schema(description = "Год издания", example = "1869") int year,
         @NotNull @Schema(description = "ID автора") UUID authorId,
         @Min(1) @Schema(description = "Количество копий", example = "5") int copiesTotal
