@@ -1,5 +1,6 @@
 package com.university.tracker;
 
+import com.university.tracker.model.Project;
 import com.university.tracker.model.Task;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -19,11 +20,15 @@ public class BulkInsertTest {
     @Test
     @Transactional
     public void insertTaskWithPersistenceContext() {
+        Project project = new Project();
+        em.persist(project);
+
         long start = System.currentTimeMillis();
 
         for (int i = 0; i < 10000; i++) {
             Task task = new Task();
             task.setTitle("title" + i);
+            task.setProject(project);
             em.persist(task);
         }
         em.flush();
@@ -38,9 +43,14 @@ public class BulkInsertTest {
         SessionFactory sessionFactory = em.getEntityManagerFactory().unwrap(SessionFactory.class);
         try (StatelessSession statelessSession = sessionFactory.openStatelessSession()) {
             statelessSession.beginTransaction();
+
+            Project project = new Project();
+            statelessSession.insert(project);
+
             for (int i = 0; i < 10000; i++) {
                 Task task = new Task();
                 task.setTitle("title" + i);
+                task.setProject(project);
                 statelessSession.insert(task);
             }
         }

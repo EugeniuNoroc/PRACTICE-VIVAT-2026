@@ -3,6 +3,7 @@ package com.university.tracker.model;
 import com.university.tracker.model.enums.Priority;
 import com.university.tracker.model.enums.TaskStatus;
 import jakarta.persistence.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -46,7 +47,8 @@ public class Task {
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
-    @OneToOne(mappedBy ="task", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(mappedBy ="task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // @BatchSize - оказывается не работает на OneToOne, только на OneToMany и ManyToOne
     private TaskDescriptionDetails details;
 
     public UUID getId() {

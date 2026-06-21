@@ -1,6 +1,7 @@
 package com.university.tracker.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class Project {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @BatchSize(size = 2)
     private List<Task> tasks = new ArrayList<>();
 
     public UUID getId() {

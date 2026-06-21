@@ -1,6 +1,7 @@
 package com.university.tracker.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.UUID;
 
