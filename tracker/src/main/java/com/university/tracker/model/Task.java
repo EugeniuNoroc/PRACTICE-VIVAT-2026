@@ -39,6 +39,9 @@ public class Task {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Version
+    private Long version;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assignee_id")
     private User assignee;
@@ -85,6 +88,10 @@ public class Task {
 
     public Project getProject() {
         return project;
+    }
+
+    public Long getVersion() {
+        return version;
     }
 
     public void setTitle(String title) {

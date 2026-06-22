@@ -33,4 +33,41 @@ public class ProjectLoader {
     public Project loadProject(UUID id) {
         return projectRepository.findById(id).orElseThrow();
     }
+
+    @Transactional
+    public Project saveProject() {
+        Project project = new Project();
+        return projectRepository.save(project);
+    }
+
+    @Transactional
+    public Task saveTask(UUID projectId) {
+        Task task = new Task();
+        task.setTitle("Original");
+        task.setProject(projectRepository.findById(projectId).orElseThrow());
+        return taskRepository.save(task);
+    }
+
+    @Transactional
+    public Task loadTask(UUID id) {
+        return taskRepository.findById(id).orElseThrow();
+    }
+
+    @Transactional
+    public Task updateTask(UUID id, String newTitle) {
+        Task task = taskRepository.findById(id).orElseThrow();
+        task.setTitle(newTitle);
+        return taskRepository.save(task);
+    }
+
+    @Transactional
+    public Task updateTaskEntity(Task task, String newTitle) {
+        task.setTitle(newTitle);
+        return taskRepository.save(task);
+    }
+
+    @Transactional
+    public Task loadTaskWithLock(UUID id) {
+        return taskRepository.findByIdForUpdate(id).orElseThrow();
+    }
 }

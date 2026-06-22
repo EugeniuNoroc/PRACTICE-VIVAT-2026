@@ -1,0 +1,1 @@
+alter table tasks add column version bigint not null default 0;

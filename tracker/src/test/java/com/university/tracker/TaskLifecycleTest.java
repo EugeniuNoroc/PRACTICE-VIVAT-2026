@@ -5,6 +5,7 @@ import com.university.tracker.model.Task;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.FlushModeType;
 import jakarta.persistence.PersistenceContext;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -18,6 +19,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TaskLifecycleTest {
     @PersistenceContext
     private EntityManager em;
+
+    @BeforeEach
+    void setUp() {
+        em.createQuery("DELETE FROM Task t").executeUpdate();
+        em.createQuery("DELETE FROM Project p").executeUpdate();
+        em.flush();
+    }
 
     @Test
     public void lifecycleTest(){
@@ -101,7 +109,7 @@ public class TaskLifecycleTest {
     }
 
     @Test
-    void flushModeCommitTes(){
+    void flushModeCommitTest(){
         Project project = new Project();
         project.setName("Project 1");
         em.persist(project);
