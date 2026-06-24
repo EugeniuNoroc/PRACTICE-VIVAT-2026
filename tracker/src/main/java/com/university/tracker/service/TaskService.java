@@ -22,6 +22,9 @@ public class TaskService {
         this.auditService = auditService;
     }
 
+    // TODO (W3 review): AOP-подводный камень из day-5 описан в доке, но в коде не показан — AuditService
+    //   вынесен в отдельный бин (что как раз ПРЯЧЕТ проблему). Добавить демо: self-вызов @Transactional-
+    //   метода внутри одного класса, который молча не открывает новую транзакцию (this.method(), не proxy).
     @Transactional
     public Task create(String title, UUID projectId, boolean auditShouldFail) {
         Task task = new Task();

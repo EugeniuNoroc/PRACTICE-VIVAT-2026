@@ -19,6 +19,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// TODO (W3 review): все "решения N+1" здесь меряют stats.getQueryExecutionCount(), который НЕ учитывает
+//   ленивые/batch-загрузки коллекций. Поэтому solveWithJoinFetch/EntityGraph/BatchSize зелёные, но не
+//   отличают N+1 от его отсутствия (проверено: solveWithEntityGraph зелёный с закомментированным @EntityGraph).
+//   Мерить getCollectionFetchCount()/getPreparedStatementCount(); day 4 AC по факту не доказаны.
 @DataJpaTest
 @ActiveProfiles("test")
 // по умолчанию @DataJpaTest пытается юзать встроенную БД, но в PostgreSQL у нас есть специфичные аннотации и типы, поэтому добавляем конфигурацию использования реального бд
@@ -154,6 +158,8 @@ public class NPlusOneDemoTest {
 
     @Test
     void solveWithEntityGraph() {
+        // TODO (W3 review): тест НЕ использует @EntityGraph (он закомментирован в ProjectRepository),
+        //   а зовёт обычный findAll() и всё равно проходит — он ничего не доказывает. Звать graph-метод.
         Project project1 = new Project();
         Project project2 = new Project();
         Project project3 = new Project();
@@ -267,6 +273,9 @@ public class NPlusOneDemoTest {
         System.out.println("Query count: " + stats.getQueryExecutionCount());
         System.out.println("Collection loads: " + stats.getCollectionLoadCount());
 
+        // TODO (W3 review): @BatchSize(2) на 3 коллекции = 1 корневой + 2 batch-SELECT'а, но
+        //   getQueryExecutionCount() их не видит (==1), а collectionLoadCount==3 не отличает batch от N+1.
+        //   День 4 AC "@BatchSize → 1+1" не доказан. Мерить getPreparedStatementCount().
         assertEquals(1, stats.getQueryExecutionCount());
         assertEquals(3, stats.getCollectionLoadCount());
     }

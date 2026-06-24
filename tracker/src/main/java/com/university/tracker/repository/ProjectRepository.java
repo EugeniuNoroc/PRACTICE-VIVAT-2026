@@ -19,6 +19,10 @@ public interface ProjectRepository extends JpaRepository<Project, UUID> {
     @Query("SELECT DISTINCT p FROM Project p LEFT JOIN FETCH p.tasks t LEFT JOIN FETCH t.details")
     List<Project> findAllWithTasksAndDetails();
 
+    // TODO (W3 review): @EntityGraph закомментирован → решение "через граф" нигде не используется вживую,
+    //   а тест solveWithEntityGraph() зовёт этот же обычный findAll() и всё равно зелёный (проверено).
+    //   День 4 AC "@EntityGraph работает, query count = 1" НЕ закрыт. Ввести отдельный
+    //   @EntityGraph(attributePaths = {"tasks"}) метод и звать в тесте именно его.
     @NullMarked
     // В комментарии для теста BatchSize
     // @EntityGraph(attributePaths = {"tasks", "tasks.details"})

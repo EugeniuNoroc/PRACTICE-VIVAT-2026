@@ -42,6 +42,9 @@ public class TransactionalPropagationTest {
 
     @Test
     void required_auditFailureCascadesToParent() {
+        // TODO (W3 review): тест пустой — контраст REQUIRED vs REQUIRES_NEW описан только в комментариях.
+        //   Сделать вариант logAudit с REQUIRED и проверить, что при падении аудита откатывается и task
+        //   (rollback-only → UnexpectedRollbackException). Чтобы откат был наблюдаем, logAudit должен писать в БД.
         // REQUIRED (дефолт): если logAudit() не ловить через try-catch —
         // исключение пометило бы транзакцию create() как rollback-only
         // и task тоже откатился бы вместе с аудитом.

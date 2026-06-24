@@ -38,6 +38,9 @@ public class BulkInsertTest {
 
     @Test
     public void insertTaskWithStatelessSession() {
+        // TODO (W3 review): транзакция StatelessSession не коммитится (beginTransaction есть, commit нет) →
+        //   на close всё откатывается, бенчмарк меряет почти no-op. И hibernate.jdbc.batch_size нигде не задан,
+        //   поэтому честного ускорения нет (замер: ~2734 vs ~2784 мс). Добавить commit + batch_size + ассерты.
         long start = System.currentTimeMillis();
 
         SessionFactory sessionFactory = em.getEntityManagerFactory().unwrap(SessionFactory.class);

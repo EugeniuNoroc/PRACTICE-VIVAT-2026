@@ -13,6 +13,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    // TODO (W3 review): username/email nullable и без unique — допустим пользователь без email и дубли email.
+    //   Если нужны инварианты — @Column(nullable = false, unique = true) + совпадающий DDL в миграции.
     @Column(name = "username")
     private String username;
 

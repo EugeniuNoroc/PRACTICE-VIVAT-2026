@@ -160,6 +160,8 @@ Hibernate при flush сравнивает текущее состояние о
 - `LazyInitializationException` - воспроизведение и обработка
 - OSIV (`open-in-view: false`) - почему выключаем
 - DTO projection через Java record и interface projection
+<!-- TODO (W3 review): interface projection в коде нет — реализована только record-проекция (ProjectSummaryDto).
+     Убрать упоминание interface projection здесь, либо добавить интерфейс-проекцию в ProjectRepository. -->
 
 **Главный инсайт:** N+1 - естественное следствие lazy loading. JOIN FETCH и @EntityGraph
 превращают ленивую загрузку в жадную для конкретного запроса. @BatchSize группирует

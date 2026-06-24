@@ -29,6 +29,8 @@ public interface TaskRepository extends JpaRepository<Task, UUID> {
     @Query(value = "SELECT status, COUNT(*) FROM tasks GROUP BY status", nativeQuery = true)
     List<Object[]> findAllTaskStatus();
 
+    // TODO (W3 review): pessimisticLockingTest лишь проверяет, что запрос отрабатывает, а не семантику
+    //   FOR UPDATE/конкуренции. Добавить тест с двумя транзакциями на реальную блокировку строки.
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT t FROM Task t WHERE t.id = :id")
     Optional<Task> findByIdForUpdate(@Param("id") UUID id);
