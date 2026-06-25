@@ -1,7 +1,7 @@
 # PRACTICE-VIVAT-2026
 
-Структурированная Java-практика под руководством куратора Алексея Борisko.
-Четыре недели нарастающей сложности - от чистого ООП до production-ready Spring приложений.
+Структурированная Java-практика под руководством куратора Алексея Борискo.
+Три недели нарастающей сложности - от чистого ООП до полноценного Spring приложения.
 
 ## Структура репозитория
 
@@ -9,8 +9,7 @@
 PRACTICE-VIVAT-2026/
 ├── pet-shelter/       # Week 1 - Java Core, JDBC, многопоточность
 ├── library-catalog/   # Week 2 - Spring Boot, REST, JdbcTemplate
-├── tracker/           # Week 3 - Spring Data JPA, Hibernate, транзакции
-└── (Week 4)           # в разработке
+└── tracker/           # Week 3 - Spring Data JPA, Hibernate, транзакции
 ```
 
 ---
