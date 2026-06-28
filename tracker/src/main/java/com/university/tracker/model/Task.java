@@ -39,9 +39,14 @@ public class Task {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    // TODO (W3 review): добавить @ColumnDefault("0") — V2 даёт "default 0" в Flyway-схеме, а entity-схема
+    //   (test, create-drop) генерится без дефолта → схемы расходятся (validate этого не ловит).
     @Version
     private Long version;
 
+    // TODO (W3 review): у assignee нет сеттера/хелпера и он нигде не выставляется (DataInitializer не
+    //   назначает исполнителей) → связь Task↔User фактически мёртвая. День 3 AC (assignee с хелпером,
+    //   обновляющим обе стороны) не закрыт. Добавить setAssignee()/assignTo(User) и засеять в DataInitializer.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assignee_id")
     private User assignee;
@@ -50,6 +55,9 @@ public class Task {
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
+    // TODO (W3 review): inverse @OneToOne(mappedBy, LAZY) без bytecode-enhancement по факту EAGER —
+    //   Hibernate всё равно делает SELECT, чтобы понять null или proxy (скрытый N+1 при загрузке Task).
+    //   Также нет get/setDetails и TaskDescriptionDetails нигде не создаётся → связь не покрыта end-to-end.
     @OneToOne(mappedBy ="task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     // @BatchSize - оказывается не работает на OneToOne, только на OneToMany и ManyToOne
     private TaskDescriptionDetails details;

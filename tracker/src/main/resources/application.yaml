@@ -1,6 +1,8 @@
 spring:
   flyway:
     enabled: true
+    # TODO (W3 review): baseline-on-migrate на greenfield не нужен — маскирует непустую/legacy-схему
+    #   вместо честной ошибки (напр. после прогона тестов с create-drop). Можно убрать.
     baseline-on-migrate: true
   application:
     name: tracker

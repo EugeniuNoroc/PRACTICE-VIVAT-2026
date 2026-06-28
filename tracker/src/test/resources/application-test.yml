@@ -1,4 +1,7 @@
 spring:
+  # TODO (W3 review): тест-профиль create-drop смотрит на ту же БД tracker_db, что и dev → прогон тестов
+  #   снесёт реальные таблицы. Завести отдельную tracker_test_db (лучше Testcontainers). Плюс миграции
+  #   Flyway тут не покрыты (flyway off) — добавить тест на ddl-auto=validate против Flyway-схемы.
   datasource:
     url: jdbc:postgresql://localhost:5432/tracker_db
     username: tracker_user

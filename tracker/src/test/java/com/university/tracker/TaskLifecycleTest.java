@@ -60,6 +60,8 @@ public class TaskLifecycleTest {
 
     @Test
     public void dirtyCheckingTest(){
+        // TODO (W3 review): главный демо дня без ассерта — поменяли title и сделали flush, но не проверили,
+        //   что в БД реально "Task 2". После flush сделать em.clear() + em.find и assert на новое значение.
         Project project = new Project();
         project.setName("Project 1");
         em.persist(project);
@@ -77,6 +79,8 @@ public class TaskLifecycleTest {
 
     @Test
     void firstLevelCacheTest(){
+        // TODO (W3 review): isSameAs доказывает идентичность объекта, но не "два find = один SELECT".
+        //   Включить Statistics и assert на getPrepareStatementCount()/entityLoadCount после второго find.
         Project project = new Project();
         project.setName("Project 1");
         em.persist(project);
@@ -127,6 +131,8 @@ public class TaskLifecycleTest {
 
     @Test
     void orphanRemovalTest(){
+        // TODO (W3 review): orphanRemoval не проверен — после remove из коллекции и flush нет ассерта,
+        //   что задача удалена из БД (em.find(Task, id) == null или count == 0).
         Project project = new Project();
         project.setName("Project 1");
         em.persist(project);

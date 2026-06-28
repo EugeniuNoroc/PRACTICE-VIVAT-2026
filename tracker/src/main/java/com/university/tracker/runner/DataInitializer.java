@@ -31,6 +31,9 @@ public class DataInitializer implements CommandLineRunner {
         this.tagRepository = tagRepository;
     }
 
+    // TODO (W3 review): сид не назначает assignee задачам, не создаёт TaskTag-связи и TaskDescriptionDetails.
+    //   Из-за этого капстоун-демо недели "все задачи проекта С ИСПОЛНИТЕЛЯМИ И ТЕГАМИ за 1 SQL" невыполнимо.
+    //   Засеять исполнителей и теги (через TaskTag), затем добавить JOIN FETCH-запрос, дающий 1 SQL.
     @Override
     public void run(String... args) {
         // Очищаем репозитории чтобы данные не дублировались, возможно можно как-то более филигранно, но добавлять проверку на каждую запись - смерти подобно

@@ -6,6 +6,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 // join entity, связующая таблица
+// TODO (W3 review): join-entity осиротевшая — на неё никто не навигирует (нет коллекции на Task/Tag,
+//   нет TaskTagRepository), ни одна строка task_tags нигде не создаётся, тестов нет. День 3 AC по
+//   @ManyToMany закрыт лишь номинально. Добавить навигируемую коллекцию List<TaskTag> + хелпер addTag(Tag)
+//   на Task и тест на сохранение/чтение тегов через TaskTag.
 @Entity
 @Table(name = "task_tags")
 public class TaskTag {
