@@ -1,4 +1,5 @@
-# library-catalog
+# PRACTICE-VIVAT-2026
+# Task 2 Spring Boot (library-catalog)
 
 Учебный проект второй недели Java-практики. Каталог библиотеки - от Spring Boot bootstrap до REST API с валидацией, документацией и тестами.
 
