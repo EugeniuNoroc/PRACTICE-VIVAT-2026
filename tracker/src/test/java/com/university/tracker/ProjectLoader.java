@@ -68,6 +68,12 @@ public class ProjectLoader {
 
     @Transactional
     public Task loadTaskWithLock(UUID id) {
-        return taskRepository.findByIdForUpdate(id).orElseThrow();
+        Task task = taskRepository.findByIdForUpdate(id).orElseThrow();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return task;
     }
 }

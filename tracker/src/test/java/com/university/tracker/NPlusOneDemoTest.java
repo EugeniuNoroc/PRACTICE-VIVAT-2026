@@ -199,7 +199,7 @@ public class NPlusOneDemoTest {
         Statistics stats = em.getEntityManagerFactory().unwrap(SessionFactory.class).getStatistics();
         stats.clear();
 
-        List<Project> projects = projectRepository.findAll();
+        List<Project> projects = projectRepository.findAllWithEntityGraph();
 
         for (Project project : projects) {
             System.out.println(project.getTasks());

@@ -1,6 +1,12 @@
 package com.university.tracker.service;
 
+import com.university.tracker.dto.ProjectResponseDto;
+import com.university.tracker.dto.TaskResponseDto;
+import com.university.tracker.dto.TaskSummary;
+import com.university.tracker.dto.UserResponseDto;
+import com.university.tracker.model.Project;
 import com.university.tracker.model.Task;
+import com.university.tracker.model.User;
 import com.university.tracker.repository.ProjectRepository;
 import com.university.tracker.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -12,9 +18,9 @@ import java.util.UUID;
 @Service
 public class TaskService {
 
-    private TaskRepository taskRepository;
-    private ProjectRepository projectRepository;
-    private AuditService auditService;
+    private final TaskRepository taskRepository;
+    private final ProjectRepository projectRepository;
+    private final AuditService auditService;
 
     public TaskService(TaskRepository taskRepository, ProjectRepository projectRepository, AuditService auditService) {
         this.taskRepository = taskRepository;
@@ -37,7 +43,7 @@ public class TaskService {
     }
 
     @Transactional(readOnly = true)
-    public List<Task> findAll() {
-        return taskRepository.findAll();
+    public List<TaskSummary> findAll() {
+        return taskRepository.findAllBy();
     }
 }

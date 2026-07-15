@@ -1,7 +1,8 @@
 package com.university.tracker.controller;
 
-import com.university.tracker.model.Task;
-import com.university.tracker.repository.TaskRepository;
+import com.university.tracker.dto.TaskResponseDto;
+import com.university.tracker.dto.TaskSummary;
+import com.university.tracker.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -14,9 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
-    private final TaskRepository taskRepository;
-    public  TaskController(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    private final TaskService taskService;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @Operation(summary = "Получить все таски")
@@ -24,7 +25,7 @@ public class TaskController {
             @ApiResponse(responseCode = "200", description ="Таски найдены, возвращены данные")
     })
     @GetMapping
-    public List<Task> findAll() {
-        return taskRepository.findAll();
+    public List<TaskSummary> findAll() {
+        return taskService.findAll();
     }
 }

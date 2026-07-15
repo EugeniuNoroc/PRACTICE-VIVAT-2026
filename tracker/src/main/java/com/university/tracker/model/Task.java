@@ -3,9 +3,11 @@ package com.university.tracker.model;
 import com.university.tracker.model.enums.Priority;
 import com.university.tracker.model.enums.TaskStatus;
 import jakarta.persistence.*;
-import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -40,6 +42,7 @@ public class Task {
     private LocalDateTime updatedAt;
 
     @Version
+    @ColumnDefault("0")
     private Long version;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -53,6 +56,9 @@ public class Task {
     @OneToOne(mappedBy ="task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     // @BatchSize - оказывается не работает на OneToOne, только на OneToMany и ManyToOne
     private TaskDescriptionDetails details;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TaskTag> tags = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -94,6 +100,18 @@ public class Task {
         return version;
     }
 
+    public User getAssignee() {
+        return assignee;
+    }
+
+    public TaskDescriptionDetails getDetails() {
+        return details;
+    }
+
+    public List<TaskTag> getTags() {
+        return tags;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -126,6 +144,14 @@ public class Task {
         this.project = project;
     }
 
+    public void setAssignee(User assignee) {
+        this.assignee = assignee;
+    }
+
+    public void setDetails(TaskDescriptionDetails details) {
+        this.details = details;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -137,5 +163,10 @@ public class Task {
     public int hashCode() {
         // Не Object.hash(id) потому что id у новой энтити равен null до вызова em.persist() из-за чего объект физически есть в Set, но найти невозмжно после генерации нового UUID при em.persist()
         return getClass().hashCode();
+    }
+
+    public void addTag(Tag tag) {
+        TaskTag taskTag = new TaskTag(this, tag);
+        tags.add(taskTag);
     }
 }

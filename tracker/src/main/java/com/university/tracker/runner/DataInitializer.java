@@ -1,9 +1,6 @@
 package com.university.tracker.runner;
 
-import com.university.tracker.model.Project;
-import com.university.tracker.model.Tag;
-import com.university.tracker.model.Task;
-import com.university.tracker.model.User;
+import com.university.tracker.model.*;
 import com.university.tracker.model.enums.Priority;
 import com.university.tracker.model.enums.TaskStatus;
 import com.university.tracker.repository.ProjectRepository;
@@ -42,10 +39,20 @@ public class DataInitializer implements CommandLineRunner {
         projectRepository.deleteAll();
         userRepository.deleteAll();
 
-        User user = new User();
-        user.setUsername("john_doe");
-        user.setEmail("john@example.com");
-        userRepository.save(user);
+        User user1 = new User();
+        user1.setUsername("john_doe");
+        user1.setEmail("john@example.com");
+        userRepository.save(user1);
+
+        User user2 = new User();
+        user2.setUsername("michael_arnis");
+        user2.setEmail("michael@example.com");
+        userRepository.save(user2);
+
+        User user3 = new User();
+        user3.setUsername("emma_vishnewski");
+        user3.setEmail("vishnewski@edward.com");
+        userRepository.save(user3);
 
         Project project1 = new Project();
         project1.setName("Website Redesign");
@@ -90,7 +97,11 @@ public class DataInitializer implements CommandLineRunner {
         task1.setCreatedAt(LocalDateTime.now());
         task1.setPriority(Priority.HIGH);
         task1.setProject(project1);
+        task1.setAssignee(user1);
+        TaskDescriptionDetails details1 = new TaskDescriptionDetails(task1, "This is a first example of markdown description");
+        task1.setDetails(details1);
         taskRepository.save(task1);
+
 
         Task task2 = new Task();
         task2.setTitle("Setup database");
@@ -98,6 +109,9 @@ public class DataInitializer implements CommandLineRunner {
         task2.setCreatedAt(LocalDateTime.now());
         task2.setPriority(Priority.CRITICAL);
         task2.setProject(project2);
+        task2.setAssignee(user2);
+        TaskDescriptionDetails details2 = new TaskDescriptionDetails(task2, "This is a second example of markdown description");
+        task2.setDetails(details2);
         taskRepository.save(task2);
 
         Task task3 = new Task();
@@ -106,6 +120,10 @@ public class DataInitializer implements CommandLineRunner {
         task3.setCreatedAt(LocalDateTime.now());
         task3.setPriority(Priority.HIGH);
         task3.setProject(project1);
+        task3.setAssignee(user3);
+        taskRepository.save(task3);
+        task3.addTag(tag1);
+        task3.addTag(tag2);
         taskRepository.save(task3);
 
         Task task4 = new Task();
@@ -114,6 +132,10 @@ public class DataInitializer implements CommandLineRunner {
         task4.setCreatedAt(LocalDateTime.now());
         task4.setPriority(Priority.MEDIUM);
         task4.setProject(project2);
+        task4.setAssignee(user1);
+        taskRepository.save(task4);
+        task4.addTag(tag3);
+        task4.addTag(tag4);
         taskRepository.save(task4);
 
         Task task5 = new Task();
@@ -122,6 +144,9 @@ public class DataInitializer implements CommandLineRunner {
         task5.setCreatedAt(LocalDateTime.now());
         task5.setPriority(Priority.CRITICAL);
         task5.setProject(project1);
+        task5.setAssignee(user2);
+        taskRepository.save(task5);
+        task5.addTag(tag5);
         taskRepository.save(task5);
 
         Task task6 = new Task();
@@ -130,6 +155,7 @@ public class DataInitializer implements CommandLineRunner {
         task6.setCreatedAt(LocalDateTime.now());
         task6.setPriority(Priority.LOW);
         task6.setProject(project2);
+        task6.setAssignee(user3);
         taskRepository.save(task6);
 
         Task task7 = new Task();
@@ -138,6 +164,7 @@ public class DataInitializer implements CommandLineRunner {
         task7.setCreatedAt(LocalDateTime.now());
         task7.setPriority(Priority.HIGH);
         task7.setProject(project1);
+        task7.setAssignee(user1);
         taskRepository.save(task7);
 
         Task task8 = new Task();
@@ -146,6 +173,7 @@ public class DataInitializer implements CommandLineRunner {
         task8.setCreatedAt(LocalDateTime.now());
         task8.setPriority(Priority.MEDIUM);
         task8.setProject(project2);
+        task8.setAssignee(user2);
         taskRepository.save(task8);
 
         Task task9 = new Task();
@@ -154,6 +182,7 @@ public class DataInitializer implements CommandLineRunner {
         task9.setCreatedAt(LocalDateTime.now());
         task9.setPriority(Priority.LOW);
         task9.setProject(project1);
+        task9.setAssignee(user3);
         taskRepository.save(task9);
 
         Task task10 = new Task();
@@ -162,6 +191,7 @@ public class DataInitializer implements CommandLineRunner {
         task10.setCreatedAt(LocalDateTime.now());
         task10.setPriority(Priority.MEDIUM);
         task10.setProject(project2);
+        task10.setAssignee(user1);
         taskRepository.save(task10);
     }
 }

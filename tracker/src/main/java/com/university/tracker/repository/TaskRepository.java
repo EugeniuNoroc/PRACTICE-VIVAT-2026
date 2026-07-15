@@ -1,10 +1,12 @@
 package com.university.tracker.repository;
 
+import com.university.tracker.dto.TaskSummary;
 import com.university.tracker.model.Task;
 import com.university.tracker.model.User;
 import com.university.tracker.model.enums.Priority;
 import com.university.tracker.model.enums.TaskStatus;
 import jakarta.persistence.LockModeType;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
@@ -22,6 +24,7 @@ public interface TaskRepository extends JpaRepository<Task, UUID> {
     List<Task> findByDueDateBefore(LocalDateTime dueDate);
     long countByStatus(TaskStatus status);
     boolean existsByTitleAndProjectId(String title, UUID projectId);
+    List<TaskSummary> findAllBy();
 
     @Query("SELECT t FROM Task t WHERE t.priority = :priority AND t.status <> 'DONE'")
     List<Task> findByPriorityAndStatus(@Param("priority") Priority priority);
